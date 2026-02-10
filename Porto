@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Alfarizzi Putra Diansyah</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      scroll-behavior: smooth;
+    }
+    
+    .font-heading {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    
+    .font-body {
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #1a1a2e;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #4a4a6a;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #6366f1;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
+      }
+    }
+    
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .animate-pulse-glow {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .skill-bar {
+      transition: width 1.5s ease-out;
+    }
+    
+    .project-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-8px);
+    }
+    
+    .section-hidden {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    
+    .section-visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.8s ease-out;
+    }
+    
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+    
+    .bg-pattern {
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.08) 0%, transparent 50%);
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body bg-[#0f0f1a] text-gray-100 overflow-auto">
+  <div id="app-wrapper" class="w-full h-full bg-pattern"><!-- Header / Navigation -->
+   <header id="header" class="fixed top-0 left-0 right-0 z-50 glass">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex items-center justify-between h-16 sm:h-20"><!-- Logo --> <a href="#home" class="flex items-center space-x-2 group">
+       <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300"><span id="logo-initial" class="font-heading font-bold text-white text-lg">A</span>
+       </div><span id="nav-name" class="font-heading font-semibold text-lg hidden sm:block">Alfarizzi Putra</span> </a> <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-1"><a href="#home" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">Beranda</a> <a href="#about" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">Tentang</a> <a href="#skills" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">Keahlian</a> <a href="#portfolio" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">Portofolio</a> <a href="#experience" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">Pengalaman</a> <a href="#contact" class="px-5 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:shadow-lg hover:shadow-indigo-500/30 transition-all duration-300">Kontak</a>
+      </div><!-- Mobile Menu Button --> <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+       </svg></button>
+     </div>
+    </nav><!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-72 bg-[#1a1a2e] shadow-2xl md:hidden">
+     <div class="p-6"><button id="close-menu-btn" class="absolute top-4 right-4 p-2 rounded-lg hover:bg-white/10 transition-colors">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+       </svg></button>
+      <div class="mt-12 space-y-2"><a href="#home" class="mobile-nav-link block px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all">Beranda</a> <a href="#about" class="mobile-nav-link block px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all">Tentang</a> <a href="#skills" class="mobile-nav-link block px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all">Keahlian</a> <a href="#portfolio" class="mobile-nav-link block px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all">Portofolio</a> <a href="#experience" class="mobile-nav-link block px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all">Pengalaman</a> <a href="#contact" class="mobile-nav-link block px-4 py-3 mt-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-center font-medium">Kontak</a>
+      </div>
+     </div>
+    </div>
+   </header><!-- Overlay for mobile menu -->
+   <div id="menu-overlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden"></div>
+   <main><!-- Hero Section / Beranda -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8">
+     <div class="max-w-7xl mx-auto w-full">
+      <div class="grid lg:grid-cols-2 gap-12 items-center"><!-- Left Content -->
+       <div class="text-center lg:text-left order-2 lg:order-1">
+        <div class="animate-fade-in-up opacity-0"><span id="hero-greeting" class="inline-block px-4 py-2 rounded-full glass text-sm text-indigo-300 mb-6">👋 Selamat Datang di Portfolio Saya</span>
+        </div>
+        <h1 class="animate-fade-in-up opacity-0 delay-100 font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"><span id="hero-title" class="block">Halo, Saya</span> <span id="hero-name" class="gradient-text">Alfarizzi Putra Diansyah</span></h1>
+        <p id="hero-role" class="animate-fade-in-up opacity-0 delay-200 text-xl sm:text-2xl text-indigo-300 font-medium mb-4">Full Stack Web Developer</p>
+        <p id="hero-description" class="animate-fade-in-up opacity-0 delay-300 text-gray-400 text-lg max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">Saya membantu mengubah ide-ide kreatif menjadi pengalaman digital yang memukau. Dengan passion dalam coding dan desain, saya menciptakan solusi web yang elegan dan fungsional.</p>
+        <div class="animate-fade-in-up opacity-0 delay-400 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"><a href="#portfolio" class="px-8 py-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold hover:shadow-xl hover:shadow-indigo-500/30 transform hover:-translate-y-1 transition-all duration-300"> Lihat Portofolio </a> <a href="#contact" class="px-8 py-4 rounded-xl glass text-white font-semibold hover:bg-white/10 transition-all duration-300"> Hubungi Saya </a>
+        </div><!-- Social Links -->
+        <div class="animate-fade-in-up opacity-0 delay-500 flex items-center justify-center lg:justify-start space-x-4 mt-10"><span class="text-gray-500 text-sm">Temukan saya di</span> <a href="#" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg hover:bg-white/10 text-gray-400 hover:text-indigo-400 transition-all">
+          <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+           <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+          </svg></a> <a href="#" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg hover:bg-white/10 text-gray-400 hover:text-indigo-400 transition-all">
+          <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg></a> <a href="#" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg hover:bg-white/10 text-gray-400 hover:text-indigo-400 transition-all">
+          <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+          </svg></a>
+        </div>
+       </div><!-- Right Content - Avatar -->
+       <div class="order-1 lg:order-2 flex justify-center">
+        <div class="relative"><!-- Decorative elements -->
+         <div class="absolute -top-8 -left-8 w-24 h-24 bg-indigo-500/20 rounded-full blur-xl animate-pulse"></div>
+         <div class="absolute -bottom-8 -right-8 w-32 h-32 bg-purple-500/20 rounded-full blur-xl animate-pulse delay-500"></div><!-- Main avatar container -->
+         <div class="animate-float relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-1 animate-pulse-glow">
+          <div class="w-full h-full rounded-3xl bg-[#1a1a2e] flex items-center justify-center overflow-hidden"><!-- Avatar placeholder with initials -->
+           <div class="w-full h-full bg-gradient-to-br from-indigo-600/30 to-purple-600/30 flex items-center justify-center"><span id="avatar-initials" class="font-heading text-6xl sm:text-7xl font-bold gradient-text">APD</span>
+           </div>
+          </div>
+         </div><!-- Floating badges -->
+         <div class="absolute -top-4 -right-4 px-4 py-2 rounded-xl glass animate-fade-in-up delay-300"><span class="text-2xl">💻</span>
+         </div>
+         <div class="absolute -bottom-4 -left-4 px-4 py-2 rounded-xl glass animate-fade-in-up delay-400"><span class="text-2xl">🚀</span>
+         </div>
+        </div>
+       </div>
+      </div><!-- Scroll indicator -->
+      <div class="hidden lg:flex justify-center mt-16 animate-bounce"><a href="#about" class="text-gray-500 hover:text-indigo-400 transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg></a>
+      </div>
+     </div>
+    </section><!-- About Section -->
+    <section id="about" class="py-20 lg:py-32 px-4 sm:px-6 lg:px-8">
+     <div class="max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-16 items-center"><!-- Left - Image/Visual -->
+       <div class="relative">
+        <div class="relative z-10">
+         <div class="aspect-square max-w-md mx-auto rounded-3xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 p-8 glass">
+          <div class="w-full h-full rounded-2xl bg-gradient-to-br from-indigo-600/30 to-purple-600/30 flex items-center justify-center">
+           <svg class="w-32 h-32 text-indigo-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+           </svg>
+          </div>
+         </div>
+        </div><!-- Background decoration -->
+        <div class="absolute top-8 left-8 w-full h-full rounded-3xl border-2 border-indigo-500/20 -z-10"></div>
+       </div><!-- Right - Content -->
+       <div><span class="inline-block px-4 py-2 rounded-full glass text-sm text-indigo-300 mb-4">Tentang Saya</span>
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">Passion dalam <span class="gradient-text">Coding</span> &amp; <span class="gradient-text">Kreativitas</span></h2>
+        <p id="about-description" class="text-gray-400 text-lg leading-relaxed mb-6">Saya adalah seorang Full Stack Web Developer dengan pengalaman lebih dari 3 tahun dalam membangun aplikasi web modern. Saya memiliki ketertarikan mendalam pada teknologi terbaru dan selalu bersemangat untuk belajar hal baru.</p>
+        <p class="text-gray-400 text-lg leading-relaxed mb-8">Fokus utama saya adalah menciptakan pengalaman pengguna yang luar biasa dengan menggabungkan desain yang indah dan fungsionalitas yang kuat. Saya percaya bahwa kode yang baik adalah kode yang tidak hanya bekerja, tetapi juga mudah dipahami dan dipelihara.</p><!-- Info cards -->
+        <div class="grid sm:grid-cols-3 gap-4">
+         <div class="p-4 rounded-2xl glass text-center">
+          <div class="text-3xl font-bold gradient-text mb-1">
+           3+
+          </div>
+          <div class="text-sm text-gray-400">
+           Tahun Pengalaman
+          </div>
+         </div>
+         <div class="p-4 rounded-2xl glass text-center">
+          <div class="text-3xl font-bold gradient-text mb-1">
+           50+
+          </div>
+          <div class="text-sm text-gray-400">
+           Proyek Selesai
+          </div>
+         </div>
+         <div class="p-4 rounded-2xl glass text-center">
+          <div class="text-3xl font-bold gradient-text mb-1">
+           30+
+          </div>
+          <div class="text-sm text-gray-400">
+           Klien Puas
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Skills Section -->
+    <section id="skills" class="py-20 lg:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-indigo-900/10 to-transparent">
+     <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16"><span class="inline-block px-4 py-2 rounded-full glass text-sm text-indigo-300 mb-4">Keahlian</span>
+       <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Teknologi &amp; <span class="gradient-text">Kemampuan</span></h2>
+       <p class="text-gray-400 text-lg max-w-2xl mx-auto">Berikut adalah teknologi dan kemampuan yang saya kuasai untuk membangun solusi digital yang inovatif.</p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-12"><!-- Hard Skills -->
+       <div class="glass rounded-3xl p-8">
+        <div class="flex items-center space-x-3 mb-8">
+         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          </svg>
+         </div>
+         <h3 class="font-heading text-xl font-semibold">Hard Skills</h3>
+        </div>
+        <div class="space-y-6">
+         <div class="skill-item">
+          <div class="flex justify-between mb-2"><span class="text-gray-300">HTML &amp; CSS</span> <span class="text-indigo-400">95%</span>
+          </div>
+          <div class="h-2 bg-gray-700/50 rounded-full overflow-hidden">
+           <div class="skill-bar h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" style="width: 95%"></div>
+          </div>
+         </div>
+         <div class="skill-item">
+          <div class="flex justify-between mb-2"><span class="text-gray-300">JavaScript</span> <span class="text-indigo-400">90%</span>
+          </div>
+          <div class="h-2 bg-gray-700/50 rounded-full overflow-hidden">
+           <div class="skill-bar h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" style="width: 90%"></div>
+          </div>
+         </div>
+         <div class="skill-item">
+          <div class="flex justify-between mb-2"><span class="text-gray-300">React.js</span> <span class="text-indigo-400">85%</span>
+          </div>
+          <div class="h-2 bg-gray-700/50 rounded-full overflow-hidden">
+           <div class="skill-bar h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" style="width: 85%"></div>
+          </div>
+         </div>
+         <div class="skill-item">
+          <div class="flex justify-between mb-2"><span class="text-gray-300">Node.js</span> <span class="text-indigo-400">80%</span>
+          </div>
+          <div class="h-2 bg-gray-700/50 rounded-full overflow-hidden">
+           <div class="skill-bar h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" style="width: 80%"></div>
+          </div>
+         </div>
+         <div class="skill-item">
+          <div class="flex justify-between mb-2"><span class="text-gray-300">MySQL / MongoDB</span> <span class="text-indigo-400">75%</span>
+          </div>
+          <div class="h-2 bg-gray-700/50 rounded-full overflow-hidden">
+           <div class="skill-bar h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" style="width: 75%"></div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Soft Skills -->
+       <div class="glass rounded-3xl p-8">
+        <div class="flex items-center space-x-3 mb-8">
+         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+         </div>
+         <h3 class="font-heading text-xl font-semibold">Soft Skills</h3>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+         <div class="p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors text-center group">
+          <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">
+           💬
+          </div><span class="text-gray-300 text-sm">Komunikasi</span>
+         </div>
+         <div class="p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors text-center group">
+          <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">
+           🤝
+          </div><span class="text-gray-300 text-sm">Kerja Tim</span>
+         </div>
+         <div class="p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors text-center group">
+          <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">
+           💡
+          </div><span class="text-gray-300 text-sm">Kreativitas</span>
+         </div>
+         <div class="p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors text-center group">
+          <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">
+           🎯
+          </div><span class="text-gray-300 text-sm">Problem Solving</span>
+         </div>
+         <div class="p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors text-center group">
+          <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">
+           ⏰
+          </div><span class="text-gray-300 text-sm">Manajemen Waktu</span>
+         </div>
+         <div class="p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors text-center group">
+          <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">
+           🚀
+          </div><span class="text-gray-300 text-sm">Fast Learner</span>
+         </div>
+        </div><!-- Tools -->
+        <div class="mt-8 pt-6 border-t border-white/10">
+         <h4 class="text-sm text-gray-400 mb-4">Tools &amp; Platform</h4>
+         <div class="flex flex-wrap gap-2"><span class="px-3 py-1 rounded-full text-xs bg-white/10 text-gray-300">VS Code</span> <span class="px-3 py-1 rounded-full text-xs bg-white/10 text-gray-300">Git</span> <span class="px-3 py-1 rounded-full text-xs bg-white/10 text-gray-300">Figma</span> <span class="px-3 py-1 rounded-full text-xs bg-white/10 text-gray-300">Postman</span> <span class="px-3 py-1 rounded-full text-xs bg-white/10 text-gray-300">Docker</span> <span class="px-3 py-1 rounded-full text-xs bg-white/10 text-gray-300">AWS</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 lg:py-32 px-4 sm:px-6 lg:px-8">
+     <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16"><span class="inline-block px-4 py-2 rounded-full glass text-sm text-indigo-300 mb-4">Portofolio</span>
+       <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Proyek <span class="gradient-text">Terbaru</span></h2>
+       <p class="text-gray-400 text-lg max-w-2xl mx-auto">Beberapa proyek pilihan yang telah saya kerjakan dengan dedikasi dan perhatian pada detail.</p>
+      </div><!-- Filter Buttons -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12"><button class="filter-btn active px-6 py-2 rounded-xl glass text-sm font-medium transition-all hover:bg-indigo-500/20" data-filter="all">Semua</button> <button class="filter-btn px-6 py-2 rounded-xl glass text-sm font-medium transition-all hover:bg-indigo-500/20" data-filter="web">Web App</button> <button class="filter-btn px-6 py-2 rounded-xl glass text-sm font-medium transition-all hover:bg-indigo-500/20" data-filter="mobile">Mobile</button> <button class="filter-btn px-6 py-2 rounded-xl glass text-sm font-medium transition-all hover:bg-indigo-500/20" data-filter="design">UI/UX</button>
+      </div><!-- Projects Grid -->
+      <div id="projects-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Project 1 -->
+       <div class="project-card glass rounded-3xl overflow-hidden group" data-category="web">
+        <div class="aspect-video bg-gradient-to-br from-indigo-600/30 to-purple-600/30 relative overflow-hidden">
+         <div class="absolute inset-0 flex items-center justify-center">
+          <svg class="w-16 h-16 text-indigo-400/50" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+         </div>
+         <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a2e] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+          <div class="flex space-x-3"><a href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-indigo-500 text-white text-sm font-medium hover:bg-indigo-600 transition-colors">Demo</a> <a href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-white/20 text-white text-sm font-medium hover:bg-white/30 transition-colors">Code</a>
+          </div>
+         </div>
+        </div>
+        <div class="p-6">
+         <div class="flex items-center space-x-2 mb-3"><span class="px-2 py-1 rounded text-xs bg-indigo-500/20 text-indigo-300">React</span> <span class="px-2 py-1 rounded text-xs bg-purple-500/20 text-purple-300">Node.js</span>
+         </div>
+         <h3 class="font-heading text-xl font-semibold mb-2 group-hover:text-indigo-400 transition-colors">E-Commerce Platform</h3>
+         <p class="text-gray-400 text-sm">Platform e-commerce modern dengan fitur keranjang belanja, pembayaran, dan manajemen produk.</p>
+        </div>
+       </div><!-- Project 2 -->
+       <div class="project-card glass rounded-3xl overflow-hidden group" data-category="mobile">
+        <div class="aspect-video bg-gradient-to-br from-purple-600/30 to-pink-600/30 relative overflow-hidden">
+         <div class="absolute inset-0 flex items-center justify-center">
+          <svg class="w-16 h-16 text-purple-400/50" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+         </div>
+         <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a2e] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+          <div class="flex space-x-3"><a href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-indigo-500 text-white text-sm font-medium hover:bg-indigo-600 transition-colors">Demo</a> <a href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-white/20 text-white text-sm font-medium hover:bg-white/30 transition-colors">Code</a>
+          </div>
+         </div>
+        </div>
+        <div class="p-6">
+         <div class="flex items-center space-x-2 mb-3"><span class="px-2 py-1 rounded text-xs bg-pink-500/20 text-pink-300">React Native</span> <span class="px-2 py-1 rounded text-xs bg-indigo-500/20 text-indigo-300">Firebase</span>
+         </div>
+         <h3 class="font-heading text-xl font-semibold mb-2 group-hover:text-indigo-400 transition-colors">Fitness Tracker App</h3>
+         <p class="text-gray-400 text-sm">Aplikasi pelacak kebugaran dengan fitur workout, nutrisi, dan statistik progress harian.</p>
+        </div>
+       </div><!-- Project 3 -->
+       <div class="project-card glass rounded-3xl overflow-hidden group" data-category="design">
+        <div class="aspect-video bg-gradient-to-br from-pink-600/30 to-orange-600/30 relative overflow-hidden">
+         <div class="absolute inset-0 flex items-center justify-center">
+          <svg class="w-16 h-16 text-pink-400/50" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+          </svg>
+         </div>
+         <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a2e] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+          <div class="flex space-x-3"><a href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-indigo-500 text-white text-sm font-medium hover:bg-indigo-600 transition-colors">Demo</a> <a href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-white/20 text-white text-sm font-medium hover:bg-white/30 transition-colors">Code</a>
+          </div>
+         </div>
+        </div>
+        <div class="p-6">
+         <div class="flex items-center space-x-2 mb-3"><span class="px-2 py-1 rounded text-xs bg-orange-500/20 text-orange-300">Figma</span> <span class="px-2 py-1 rounded text-xs bg-pink-500/20 text-pink-300">UI/UX</span>
+         </div>
+         <h3 class="font-heading text-xl font-semibold mb-2 group-hover:text-indigo-400 transition-colors">Banking Dashboard</h3>
+         <p class="text-gray-400 text-sm">Desain UI/UX dashboard perbankan dengan fokus pada user experience dan visualisasi data.</p>
+        </div>
+       </div><!-- Project 4 -->
+       <div class="project-card glass rounded-3xl overflow-hidden group" data-category="web">
+        <div class="aspect-video bg-gradient-to-br from-emerald-600/30 to-teal-600/30 relative overflow-hidden">
+         <div class="absolute inset-0 flex items-center justify-center">
+          <svg class="w-16 h-16 text-emerald-400/50" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+          </svg>
+         </div>
+         <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a2e] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+          <div class="flex space-x-3"><a href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-indigo-500 text-white text-sm font-medium hover:bg-indigo-600 transition-colors">Demo</a> <a href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-white/20 text-white text-sm font-medium hover:bg-white/30 transition-colors">Code</a>
+          </div>
+         </div>
+        </div>
+        <div class="p-6">
+         <div class="flex items-center space-x-2 mb-3"><span class="px-2 py-1 rounded text-xs bg-emerald-500/20 text-emerald-300">Vue.js</span> <span class="px-2 py-1 rounded text-xs bg-teal-500/20 text-teal-300">MongoDB</span>
+         </div>
+         <h3 class="font-heading text-xl font-semibold mb-2 group-hover:text-indigo-400 transition-colors">Task Management</h3>
+         <p class="text-gray-400 text-sm">Aplikasi manajemen tugas dengan fitur kolaborasi tim, deadline tracking, dan notifikasi.</p>
+        </div>
+       </div><!-- Project 5 -->
+       <div class="project-card glass rounded-3xl overflow-hidden group" data-category="web">
+        <div class="aspect-video bg-gradient-to-br from-amber-600/30 to-yellow-600/30 relative overflow-hidden">
+         <div class="absolute inset-0 flex items-center justify-center">
+          <svg class="w-16 h-16 text-amber-400/50" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6v4H7V16z" />
+          </svg>
+         </div>
+         <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a2e] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+          <div class="flex space-x-3"><a href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-indigo-500 text-white text-sm font-medium hover:bg-indigo-600 transition-colors">Demo</a> <a href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-white/20 text-white text-sm font-medium hover:bg-white/30 transition-colors">Code</a>
+          </div>
+         </div>
+        </div>
+        <div class="p-6">
+         <div class="flex items-center space-x-2 mb-3"><span class="px-2 py-1 rounded text-xs bg-amber-500/20 text-amber-300">Next.js</span> <span class="px-2 py-1 rounded text-xs bg-yellow-500/20 text-yellow-300">PostgreSQL</span>
+         </div>
+         <h3 class="font-heading text-xl font-semibold mb-2 group-hover:text-indigo-400 transition-colors">News Portal</h3>
+         <p class="text-gray-400 text-sm">Portal berita modern dengan CMS, sistem komentar, dan fitur personalisasi konten.</p>
+        </div>
+       </div><!-- Project 6 -->
+       <div class="project-card glass rounded-3xl overflow-hidden group" data-category="design">
+        <div class="aspect-video bg-gradient-to-br from-cyan-600/30 to-blue-600/30 relative overflow-hidden">
+         <div class="absolute inset-0 flex items-center justify-center">
+          <svg class="w-16 h-16 text-cyan-400/50" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+         </div>
+         <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a2e] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+          <div class="flex space-x-3"><a href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-indigo-500 text-white text-sm font-medium hover:bg-indigo-600 transition-colors">Demo</a> <a href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-white/20 text-white text-sm font-medium hover:bg-white/30 transition-colors">Code</a>
+          </div>
+         </div>
+        </div>
+        <div class="p-6">
+         <div class="flex items-center space-x-2 mb-3"><span class="px-2 py-1 rounded text-xs bg-cyan-500/20 text-cyan-300">Figma</span> <span class="px-2 py-1 rounded text-xs bg-blue-500/20 text-blue-300">Prototype</span>
+         </div>
+         <h3 class="font-heading text-xl font-semibold mb-2 group-hover:text-indigo-400 transition-colors">Travel App Design</h3>
+         <p class="text-gray-400 text-sm">Desain aplikasi travel dengan fokus pada pengalaman booking yang seamless dan intuitif.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Experience Section -->
+    <section id="experience" class="py-20 lg:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-purple-900/10 to-transparent">
+     <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16"><span class="inline-block px-4 py-2 rounded-full glass text-sm text-indigo-300 mb-4">Pengalaman &amp; Prestasi</span>
+       <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Perjalanan <span class="gradient-text">Karir</span></h2>
+       <p class="text-gray-400 text-lg max-w-2xl mx-auto">Timeline pengalaman profesional dan pencapaian yang telah saya raih selama berkarir.</p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-12"><!-- Education Timeline -->
+       <div>
+        <h3 class="font-heading text-xl font-semibold mb-8 flex items-center"><span class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mr-3">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C6.5 6.253 2 10.998 2 17.25c0 5.105 3.07 9.408 7.5 11.398m0-22.397c5.5 0 10 4.745 10 10.997 0 5.105-3.07 9.408-7.5 11.398M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 0a3 3 0 11-6 0 3 3 0 016 0zM9 18.75a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg></span> Riwayat Pendidikan</h3>
+        <div class="space-y-6 relative"><!-- Timeline line -->
+         <div class="absolute left-[19px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-indigo-500 to-purple-500"></div><!-- Education Item 1 -->
+         <div class="relative pl-12">
+          <div class="absolute left-0 w-10 h-10 rounded-full bg-indigo-500/20 border-2 border-indigo-500 flex items-center justify-center">
+           <div class="w-3 h-3 rounded-full bg-indigo-500"></div>
+          </div>
+          <div class="glass rounded-2xl p-5">
+           <div class="flex flex-wrap items-center justify-between mb-2">
+            <h4 class="font-heading font-semibold text-indigo-300">D4 Teknik Informatika</h4><span class="text-xs text-gray-500">2018 - 2022</span>
+           </div>
+           <p class="text-sm text-gray-400 mb-2">Politeknik Bandung, Bandung</p>
+           <p class="text-sm text-gray-500">IPK: 3.5/4.0 • Fokus: Pengembangan Aplikasi &amp; Jaringan Komputer • Proyek Akhir: Sistem Informasi Manajemen Inventaris</p>
+          </div>
+         </div><!-- Education Item 2 -->
+         <div class="relative pl-12">
+          <div class="absolute left-0 w-10 h-10 rounded-full bg-purple-500/20 border-2 border-purple-500 flex items-center justify-center">
+           <div class="w-3 h-3 rounded-full bg-purple-500"></div>
+          </div>
+          <div class="glass rounded-2xl p-5">
+           <div class="flex flex-wrap items-center justify-between mb-2">
+            <h4 class="font-heading font-semibold text-purple-300">SMAN 1 Subang</h4><span class="text-xs text-gray-500">2015 - 2018</span>
+           </div>
+           <p class="text-sm text-gray-400 mb-2">Subang, Jawa Barat</p>
+           <p class="text-sm text-gray-500">Jurusan IPA • Nilai Ujian Nasional: 88.25 • Aktif di Klub Robotika dan Kompetisi Sains Nasional</p>
+          </div>
+         </div><!-- Education Item 3 -->
+         <div class="relative pl-12">
+          <div class="absolute left-0 w-10 h-10 rounded-full bg-pink-500/20 border-2 border-pink-500 flex items-center justify-center">
+           <div class="w-3 h-3 rounded-full bg-pink-500"></div>
+          </div>
+          <div class="glass rounded-2xl p-5">
+           <div class="flex flex-wrap items-center justify-between mb-2">
+            <h4 class="font-heading font-semibold text-pink-300">SMP IT Alamy</h4><span class="text-xs text-gray-500">2012 - 2015</span>
+           </div>
+           <p class="text-sm text-gray-400 mb-2">Subang, Jawa Barat</p>
+           <p class="text-sm text-gray-500">Sekolah Menengah Pertama dengan Program Teknologi Informasi • Nilai Ujian Nasional: 86.50 • Aktif di Ekstrakurikuler Teknologi</p>
+          </div>
+         </div><!-- Education Item 4 -->
+         <div class="relative pl-12">
+          <div class="absolute left-0 w-10 h-10 rounded-full bg-orange-500/20 border-2 border-orange-500 flex items-center justify-center">
+           <div class="w-3 h-3 rounded-full bg-orange-500"></div>
+          </div>
+          <div class="glass rounded-2xl p-5">
+           <div class="flex flex-wrap items-center justify-between mb-2">
+            <h4 class="font-heading font-semibold text-orange-300">SDN Langensari Subang</h4><span class="text-xs text-gray-500">2006 - 2012</span>
+           </div>
+           <p class="text-sm text-gray-400 mb-2">Subang, Jawa Barat</p>
+           <p class="text-sm text-gray-500">Sekolah Dasar Negeri • Nilai Ujian Akhir: 8.5/10 • Aktif di Pramuka dan Kegiatan Akademik</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Achievements & Certifications -->
+       <div>
+        <h3 class="font-heading text-xl font-semibold mb-8 flex items-center"><span class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mr-3">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+          </svg></span> Sertifikasi &amp; Prestasi</h3>
+        <div class="space-y-4"><!-- Certificate 1 -->
+         <div class="glass rounded-2xl p-5 hover:bg-white/10 transition-colors group">
+          <div class="flex items-start space-x-4">
+           <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center flex-shrink-0"><span class="text-2xl">🏆</span>
+           </div>
+           <div>
+            <h4 class="font-heading font-semibold group-hover:text-indigo-400 transition-colors">AWS Certified Developer</h4>
+            <p class="text-sm text-gray-400">Amazon Web Services • 2023</p>
+           </div>
+          </div>
+         </div><!-- Certificate 2 -->
+         <div class="glass rounded-2xl p-5 hover:bg-white/10 transition-colors group">
+          <div class="flex items-start space-x-4">
+           <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center flex-shrink-0"><span class="text-2xl">📜</span>
+           </div>
+           <div>
+            <h4 class="font-heading font-semibold group-hover:text-indigo-400 transition-colors">Meta Front-End Developer</h4>
+            <p class="text-sm text-gray-400">Meta (Coursera) • 2022</p>
+           </div>
+          </div>
+         </div><!-- Certificate 3 -->
+         <div class="glass rounded-2xl p-5 hover:bg-white/10 transition-colors group">
+          <div class="flex items-start space-x-4">
+           <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500/20 to-orange-500/20 flex items-center justify-center flex-shrink-0"><span class="text-2xl">🎖️</span>
+           </div>
+           <div>
+            <h4 class="font-heading font-semibold group-hover:text-indigo-400 transition-colors">Google UX Design Certificate</h4>
+            <p class="text-sm text-gray-400">Google • 2022</p>
+           </div>
+          </div>
+         </div><!-- Achievement -->
+         <div class="glass rounded-2xl p-5 hover:bg-white/10 transition-colors group">
+          <div class="flex items-start space-x-4">
+           <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 flex items-center justify-center flex-shrink-0"><span class="text-2xl">🥇</span>
+           </div>
+           <div>
+            <h4 class="font-heading font-semibold group-hover:text-indigo-400 transition-colors">Juara 1 Hackathon Nasional</h4>
+            <p class="text-sm text-gray-400">TechFest Indonesia • 2021</p>
+           </div>
+          </div>
+         </div><!-- Education -->
+         <div class="glass rounded-2xl p-5 hover:bg-white/10 transition-colors group">
+          <div class="flex items-start space-x-4">
+           <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-yellow-500/20 flex items-center justify-center flex-shrink-0"><span class="text-2xl">🎓</span>
+           </div>
+           <div>
+            <h4 class="font-heading font-semibold group-hover:text-indigo-400 transition-colors">S1 Teknik Informatika</h4>
+            <p class="text-sm text-gray-400">Universitas Indonesia • 2019</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Contact Section -->
+    <section id="contact" class="py-20 lg:py-32 px-4 sm:px-6 lg:px-8">
+     <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16"><span class="inline-block px-4 py-2 rounded-full glass text-sm text-indigo-300 mb-4">Kontak</span>
+       <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Mari <span class="gradient-text">Terhubung</span></h2>
+       <p class="text-gray-400 text-lg max-w-2xl mx-auto">Punya proyek menarik atau ingin berkolaborasi? Jangan ragu untuk menghubungi saya.</p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-12"><!-- Contact Info -->
+       <div class="space-y-6">
+        <div class="glass rounded-3xl p-8">
+         <h3 class="font-heading text-xl font-semibold mb-6">Informasi Kontak</h3>
+         <div class="space-y-4"><!-- Email --> <a href="mailto:ahmad.rizki@email.com" class="flex items-center space-x-4 p-4 rounded-2xl hover:bg-white/10 transition-colors group">
+           <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+           </div>
+           <div>
+            <p class="text-sm text-gray-400">Email</p>
+            <p id="contact-email" class="text-gray-200 group-hover:text-indigo-400 transition-colors">ahmad.rizki@email.com</p>
+           </div></a> <!-- WhatsApp --> <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-4 p-4 rounded-2xl hover:bg-white/10 transition-colors group">
+           <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+           </div>
+           <div>
+            <p class="text-sm text-gray-400">WhatsApp</p>
+            <p id="contact-whatsapp" class="text-gray-200 group-hover:text-indigo-400 transition-colors">+62 812 3456 7890</p>
+           </div></a> <!-- Location -->
+          <div class="flex items-center space-x-4 p-4 rounded-2xl">
+           <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+           </div>
+           <div>
+            <p class="text-sm text-gray-400">Lokasi</p>
+            <p class="text-gray-200">Bandung, Indonesia</p>
+           </div>
+          </div>
+         </div><!-- Social Links -->
+         <div class="mt-8 pt-6 border-t border-white/10">
+          <p class="text-sm text-gray-400 mb-4">Ikuti saya di</p>
+          <div class="flex space-x-3"><a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-gray-400 hover:text-indigo-400 hover:bg-white/10 transition-all">
+            <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+             <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+            </svg></a> <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-gray-400 hover:text-indigo-400 hover:bg-white/10 transition-all">
+            <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg></a> <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-gray-400 hover:text-indigo-400 hover:bg-white/10 transition-all">
+            <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+            </svg></a> <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-gray-400 hover:text-indigo-400 hover:bg-white/10 transition-all">
+            <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+             <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417a9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+            </svg></a>
+          </div>
+         </div>
+        </div>
+       </div><!-- Contact Form -->
+       <div class="glass rounded-3xl p-8">
+        <h3 class="font-heading text-xl font-semibold mb-6">Kirim Pesan</h3>
+        <form id="contact-form" class="space-y-5">
+         <div><label for="name" class="block text-sm text-gray-400 mb-2">Nama Lengkap</label> <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-200 placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Masukkan nama Anda">
+         </div>
+         <div><label for="email" class="block text-sm text-gray-400 mb-2">Email</label> <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-200 placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Masukkan email Anda">
+         </div>
+         <div><label for="subject" class="block text-sm text-gray-400 mb-2">Subjek</label> <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-200 placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Topik pesan Anda">
+         </div>
+         <div><label for="message" class="block text-sm text-gray-400 mb-2">Pesan</label> <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-200 placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-colors resize-none" placeholder="Tulis pesan Anda di sini..."></textarea>
+         </div><button type="submit" class="w-full px-8 py-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold hover:shadow-xl hover:shadow-indigo-500/30 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center space-x-2"> <span>Kirim Pesan</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg></button>
+        </form><!-- Success message (hidden by default) -->
+        <div id="form-success" class="hidden mt-6 p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-center">
+         <p class="font-medium">✓ Pesan berhasil dikirim!</p>
+         <p class="text-sm text-emerald-400 mt-1">Terima kasih, saya akan segera menghubungi Anda.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="py-8 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+    <div class="max-w-7xl mx-auto">
+     <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0"><!-- Logo & Copyright -->
+      <div class="flex items-center space-x-3">
+       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center"><span id="footer-logo-initial" class="font-heading font-bold text-white text-sm">A</span>
+       </div>
+       <p id="copyright-text" class="text-gray-400 text-sm">© 2024 Alfarizzi Putra Diansyah. All rights reserved.</p>
+      </div><!-- Quick Links -->
+      <div class="flex items-center space-x-6 text-sm"><a href="#home" class="text-gray-400 hover:text-indigo-400 transition-colors">Beranda</a> <a href="#about" class="text-gray-400 hover:text-indigo-400 transition-colors">Tentang</a> <a href="#portfolio" class="text-gray-400 hover:text-indigo-400 transition-colors">Portofolio</a> <a href="#contact" class="text-gray-400 hover:text-indigo-400 transition-colors">Kontak</a>
+      </div><!-- Social -->
+      <div class="flex items-center space-x-3"><a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-indigo-400 transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+         <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+        </svg></a> <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-indigo-400 transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+        </svg></a> <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-indigo-400 transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+        </svg></a>
+      </div>
+     </div><!-- Made with love -->
+     <div class="mt-6 text-center">
+      <p class="text-gray-500 text-xs">Dibuat dengan ❤️ menggunakan HTML, CSS &amp; JavaScript</p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      owner_name: 'Alfarizzi Putra Diansyah',
+      role_title: 'Full Stack Web Developer',
+      tagline: 'Selamat Datang di Portfolio Saya',
+      hero_title: 'Halo, Saya',
+      hero_description: 'Saya membantu mengubah ide-ide kreatif menjadi pengalaman digital yang memukau. Dengan passion dalam coding dan desain, saya menciptakan solusi web yang elegan dan fungsional.',
+      about_text: 'Saya adalah seorang Full Stack Web Developer dengan pengalaman lebih dari 3 tahun dalam membangun aplikasi web modern. Saya memiliki ketertarikan mendalam pada teknologi terbaru dan selalu bersemangat untuk belajar hal baru.',
+      email_address: 'alfarizzi1@email.com',
+      whatsapp_number: '+62 812 3456 7890',
+      background_color: '#0f0f1a',
+      surface_color: '#1a1a2e',
+      text_color: '#f3f4f6',
+      primary_color: '#6366f1',
+      accent_color: '#a855f7'
+    };
+    
+    let config = { ...defaultConfig };
+    
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (newConfig) => {
+          config = { ...defaultConfig, ...newConfig };
+          
+          // Update owner name
+          const ownerName = config.owner_name || defaultConfig.owner_name;
+          const initials = ownerName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 3);
+          
+          document.getElementById('nav-name').textContent = ownerName;
+          document.getElementById('hero-name').textContent = ownerName;
+          document.getElementById('logo-initial').textContent = initials[0];
+          document.getElementById('avatar-initials').textContent = initials;
+          document.getElementById('footer-logo-initial').textContent = initials[0];
+          document.getElementById('copyright-text').textContent = `© 2024 ${ownerName}. All rights reserved.`;
+          
+          // Update role
+          document.getElementById('hero-role').textContent = config.role_title || defaultConfig.role_title;
+          
+          // Update hero content
+          document.getElementById('hero-greeting').textContent = '👋 ' + (config.tagline || defaultConfig.tagline);
+          document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
+          document.getElementById('hero-description').textContent = config.hero_description || defaultConfig.hero_description;
+          
+          // Update about
+          document.getElementById('about-description').textContent = config.about_text || defaultConfig.about_text;
+          
+          // Update contact
+          document.getElementById('contact-email').textContent = config.email_address || defaultConfig.email_address;
+          document.getElementById('contact-whatsapp').textContent = config.whatsapp_number || defaultConfig.whatsapp_number;
+          
+          // Update colors
+          const bgColor = config.background_color || defaultConfig.background_color;
+          const surfaceColor = config.surface_color || defaultConfig.surface_color;
+          const textColor = config.text_color || defaultConfig.text_color;
+          const primaryColor = config.primary_color || defaultConfig.primary_color;
+          const accentColor = config.accent_color || defaultConfig.accent_color;
+          
+          document.documentElement.style.setProperty('--bg-color', bgColor);
+          document.getElementById('app-wrapper').style.backgroundColor = bgColor;
+          document.body.style.backgroundColor = bgColor;
+          document.body.style.color = textColor;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                config.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                config.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['owner_name', config.owner_name || defaultConfig.owner_name],
+          ['role_title', config.role_title || defaultConfig.role_title],
+          ['tagline', config.tagline || defaultConfig.tagline],
+          ['hero_title', config.hero_title || defaultConfig.hero_title],
+          ['hero_description', config.hero_description || defaultConfig.hero_description],
+          ['about_text', config.about_text || defaultConfig.about_text],
+          ['email_address', config.email_address || defaultConfig.email_address],
+          ['whatsapp_number', config.whatsapp_number || defaultConfig.whatsapp_number]
+        ])
+      });
+    }
+    
+    // Mobile menu functionality
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    
+    function openMenu() {
+      mobileMenu.classList.add('active');
+      menuOverlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeMenu() {
+      mobileMenu.classList.remove('active');
+      menuOverlay.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    
+    mobileMenuBtn.addEventListener('click', openMenu);
+    closeMenuBtn.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+    
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+    
+    // Header scroll effect
+    const header = document.getElementById('header');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 100) {
+        header.style.background = 'rgba(15, 15, 26, 0.95)';
+      } else {
+        header.style.background = 'rgba(255, 255, 255, 0.05)';
+      }
+      
+      lastScroll = currentScroll;
+    });
+    
+    // Portfolio filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active', 'bg-indigo-500/30'));
+        btn.classList.add('active', 'bg-indigo-500/30');
+        
+        const filter = btn.dataset.filter;
+        
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'block';
+            card.style.opacity = '0';
+            setTimeout(() => {
+              card.style.opacity = '1';
+            }, 50);
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+    
+    // Contact form handling
+    const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(contactForm);
+      const data = Object.fromEntries(formData);
+      
+      console.log('Form submitted:', data);
+      
+      contactForm.style.display = 'none';
+      formSuccess.classList.remove('hidden');
+      
+      setTimeout(() => {
+        contactForm.style.display = 'block';
+        formSuccess.classList.add('hidden');
+        contactForm.reset();
+      }, 5000);
+    });
+    
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('section-visible');
+          entry.target.classList.remove('section-hidden');
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('section').forEach(section => {
+      section.classList.add('section-hidden');
+      observer.observe(section);
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+    
+    // Skill bar animation
+    const skillBars = document.querySelectorAll('.skill-bar');
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bar = entry.target;
+          const width = bar.style.width;
+          bar.style.width = '0%';
+          setTimeout(() => {
+            bar.style.width = width;
+          }, 200);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    skillBars.forEach(bar => skillObserver.observe(bar));
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9cbeb842d59cb5c9',t:'MTc3MDc1OTE1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
