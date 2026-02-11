@@ -1,694 +1,1226 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Northern Italy — Destinasi Premium Minimalis</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Konfigurasi Tailwind untuk Font Inter dan Palet Warna Premium -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary': '#003366', // Deep Navy Blue (Premium)
-                        'accent': '#B8860B', // Dark Gold/Bronze
-                        'bg-light': '#F8F8F8', // Off-White
-                        'text-dark': '#333333',
-                        'bg-dark': '#1C1C1C', // Dark Charcoal
-                        'text-light': '#E0E0E0',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    // Animasi untuk simulasi scroll/reveal
-                    animation: {
-                        'slide-up': 'slideUp 0.6s ease-out forwards',
-                    },
-                    keyframes: {
-                        slideUp: {
-                            '0%': { opacity: 0, transform: 'translateY(20px)' },
-                            '100%': { opacity: 1, transform: 'translateY(0)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Gaya dasar untuk Dark/Light Mode */
-        .light {
-            background-color: theme('colors.bg-light');
-            color: theme('colors.text-dark');
-        }
-        .dark {
-            background-color: theme('colors.bg-dark');
-            color: theme('colors.text-light');
-        }
-        /* Sidebar tetap tersembunyi secara default, hanya muncul di mobile */
-        #sidebar-menu {
-            transition: transform 0.3s ease-in-out;
-            transform: translateX(100%);
-        }
-        #sidebar-menu.active {
-            transform: translateX(0);
-        }
-        /* Styling untuk Parallax/Video Background (Simulasi) */
-        .hero-bg {
-            background-image: url('https://placehold.co/1920x1080/003366/FFFFFF?text=Pemandangan+Danau+Como');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Efek Parallax */
-            height: 80vh;
-        }
-    </style>
-</head>
-<body class="light font-sans transition-colors duration-500" x-data="{ isMenuOpen: false }">
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alfarizzi Putra Diansyah - Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      scroll-behavior: smooth;
+    }
 
-    <!-- 1.a & 1.g: Header / Navbar (Navigasi Utama & Responsif) -->
-    <header class="sticky top-0 z-40 shadow-lg backdrop-blur-md bg-opacity-80 dark:bg-opacity-80 transition-all duration-300 dark:bg-bg-dark bg-bg-light">
-        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <!-- Logo Brand -->
-            <a href="#" class="text-2xl font-bold tracking-wider text-primary dark:text-accent">Northern Italia</a>
+    /* Light mode (default) */
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-light: #94a3b8;
+      --border-color: #e2e8f0;
+    }
 
-            <!-- Navigasi Desktop -->
-            <div class="hidden lg:flex space-x-8 items-center">
-                <a href="#destinasi" class="nav-link">Destinasi</a>
-                <a href="#galeri" class="nav-link">Galeri</a>
-                <a href="#reservasi" class="nav-link">Reservasi</a>
-                <a href="#blog" class="nav-link">Blog</a>
-                <a href="#kontak" class="nav-link">Kontak</a>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
 
-                <!-- 1.e: Search Bar Desktop -->
-                <div class="relative">
-                    <input type="text" placeholder="Cari..." class="py-1 px-3 border border-gray-300 dark:border-gray-700 rounded-full text-sm dark:bg-bg-dark bg-bg-light focus:outline-none focus:ring-2 focus:ring-accent transition duration-300">
-                    <button class="absolute right-0 top-0 mt-1 mr-2 text-gray-500 dark:text-gray-400">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    </button>
-                </div>
-            </div>
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
 
-            <!-- Kontrol Aksi: Dark/Light & Bahasa -->
-            <div class="flex items-center space-x-4">
-                <!-- 2.d & 3.m: Multibahasa (Language Switcher) -->
-                <button id="lang-switcher" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 text-sm font-medium border border-primary dark:border-accent dark:text-accent text-primary">ID/EN</button>
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle var(--duration) infinite;
+    }
+    
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .font-body {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .nav-link {
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .skill-bar {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transition: width 1s ease-out;
+    }
+    
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.3;
+      animation: blob 8s ease-in-out infinite;
+    }
+    
+    @keyframes blob {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeIn 0.8s ease forwards;
+    }
+    
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+    .stagger-5 { animation-delay: 0.5s; }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px -10px rgba(102, 126, 234, 0.5);
+    }
+    
+    .glass {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
 
-                <!-- 2.a & 3.p: Dark / Light Mode Toggle -->
-                <button id="dark-mode-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300">
-                    <!-- Icon Light Mode (Sun) -->
-                    <svg id="sun-icon" class="w-6 h-6 hidden text-yellow-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3a9 9 0 109 9c0-.62-.1-1.22-.29-1.78a.99.99 0 00-1.88.58 7 7 0 11-7.85 7.85c-.3-.8-.47-1.66-.47-2.57 0-4.96 4.04-9 9-9z"></path></svg>
-                    <!-- Icon Dark Mode (Moon) -->
-                    <svg id="moon-icon" class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M20 15a8 8 0 11-8-8c0 4.41 3.59 8 8 8zM2 12a10 10 0 1020 0 10 10 0 00-20 0z"></path></svg>
-                </button>
+    [data-theme="dark"] .glass {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(100, 116, 139, 0.3);
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 2px;
+    }
+    
+    .timeline-item {
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 24px;
+      width: 2px;
+      height: calc(100% - 8px);
+      background: var(--border-color);
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
 
-                <!-- Tombol Menu Mobile -->
-                <button id="menu-toggle" class="lg:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                </button>
-            </div>
-        </nav>
-    </header>
-
-    <!-- 1.d: Sidebar (Mobile) -->
-    <div id="sidebar-menu" class="fixed top-0 right-0 h-full w-64 bg-bg-light dark:bg-gray-900 shadow-2xl z-50 p-6 lg:hidden flex flex-col items-start space-y-4">
-        <button id="close-menu" class="absolute top-4 right-4 p-2 text-primary dark:text-text-light">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-        <h3 class="text-lg font-bold mb-4 mt-8 text-primary dark:text-accent">Menu</h3>
-        <a href="#destinasi" class="sidebar-link">Destinasi</a>
-        <a href="#galeri" class="sidebar-link">Galeri</a>
-        <a href="#reservasi" class="sidebar-link">Reservasi</a>
-        <a href="#blog" class="sidebar-link">Blog</a>
-        <a href="#kontak" class="sidebar-link">Kontak</a>
-        <hr class="w-full border-gray-300 dark:border-gray-700 my-4">
-        <!-- 1.e: Search Bar Mobile -->
-        <input type="text" placeholder="Cari..." class="w-full py-2 px-4 border border-gray-300 dark:border-gray-700 rounded-lg text-sm dark:bg-bg-dark bg-bg-light focus:outline-none focus:ring-2 focus:ring-accent transition duration-300">
-    </div>
-
-
-    <!-- 1.b & 2.i: Hero Section (Bagian Utama Atas dengan Simulasi Video Background) -->
-    <section id="hero" class="hero-bg flex items-center justify-center text-center p-12 lg:p-24 relative overflow-hidden">
-        <!-- Overlay untuk Kontras Teks -->
-        <div class="absolute inset-0 bg-primary opacity-60 dark:opacity-70"></div>
+    /* Background color transitions */
+    body, 
+    #app-wrapper,
+    .bg-white,
+    .bg-slate-50 {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body bg-slate-50 text-slate-800 overflow-auto">
+  <div id="app-wrapper" class="w-full h-full overflow-auto" style="background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f0f4f8 100%); min-height: 100vh; position: relative;"><!-- Content Wrapper -->
+   <div style="position: relative; z-index: 1;"><!-- Header / Navigation -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 glass transition-all duration-300" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);">
+     <nav class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between"><!-- Logo --> <a href="#home" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-display font-bold text-lg">
+         A
+        </div>
+        <div><span id="nav-name" class="font-display font-semibold text-lg text-slate-900 transition-colors duration-300">Alfarizzi</span>
+         <p id="nav-tagline" class="text-xs text-slate-500 transition-colors duration-300">Web Developer</p>
+        </div></a> <!-- Desktop Menu -->
+       <ul class="hidden md:flex items-center gap-8">
+        <li><a href="#home" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Beranda</a></li>
+        <li><a href="#about" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Tentang</a></li>
+        <li><a href="#skills" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Keahlian</a></li>
+        <li><a href="#portfolio" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Portfolio</a></li>
+        <li><a href="#education" class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Pendidikan</a></li>
+        <li><a href="#contact" class="btn-primary px-5 py-2 rounded-full text-white text-sm font-medium">Kontak</a></li>
+       </ul><!-- Mobile Menu Button -->
+       <div class="md:hidden"><button id="menu-btn" class="w-10 h-10 flex flex-col items-center justify-center gap-1.5"> <span class="w-6 h-0.5 bg-slate-800 transition-all"></span> <span class="w-6 h-0.5 bg-slate-800 transition-all"></span> <span class="w-4 h-0.5 bg-slate-800 transition-all"></span> </button>
+       </div>
+      </div>
+     </nav><!-- Mobile Menu -->
+     <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-72 h-full bg-white shadow-2xl md:hidden">
+      <div class="p-6"><button id="close-menu" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg></button>
+       <ul class="mt-12 space-y-6">
+        <li><a href="#home" class="block text-lg font-medium text-slate-700 hover:text-indigo-600">Beranda</a></li>
+        <li><a href="#about" class="block text-lg font-medium text-slate-700 hover:text-indigo-600">Tentang</a></li>
+        <li><a href="#skills" class="block text-lg font-medium text-slate-700 hover:text-indigo-600">Keahlian</a></li>
+        <li><a href="#portfolio" class="block text-lg font-medium text-slate-700 hover:text-indigo-600">Portfolio</a></li>
+        <li><a href="#education" class="block text-lg font-medium text-slate-700 hover:text-indigo-600">Pendidikan</a></li>
+        <li><a href="#contact" class="btn-primary inline-block px-6 py-3 rounded-full text-white font-medium">Kontak</a></li>
+       </ul>
+      </div>
+     </div>
+    </header><!-- Hero Section / Beranda -->
+    <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden"><!-- Background Blobs -->
+     <div class="blob w-96 h-96 bg-indigo-400 top-20 -left-48"></div>
+     <div class="blob w-80 h-80 bg-purple-400 bottom-20 right-0" style="animation-delay: -4s;"></div>
+     <div class="max-w-7xl mx-auto px-6 py-20 w-full">
+      <div class="grid lg:grid-cols-2 gap-12 items-center"><!-- Text Content -->
+       <div class="order-2 lg:order-1">
+        <p class="fade-in stagger-1 text-indigo-600 font-medium mb-4">👋 Halo, Saya</p>
+        <h1 id="hero-title" class="fade-in stagger-2 font-display text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight">Alfarizzi Putra<br><span class="gradient-text">Diansyah</span></h1>
+        <p id="hero-role" class="fade-in stagger-3 text-xl md:text-2xl text-slate-600 mb-6">Web Developer &amp; UI/UX Designer</p>
+        <p id="hero-description" class="fade-in stagger-4 text-slate-500 mb-8 max-w-lg leading-relaxed">🚀 Mahasiswa D4 Sistem Informatika Politeknik Negeri Bandung yang passionate dalam menciptakan pengalaman digital yang indah dan fungsional.</p>
+        <div class="fade-in stagger-5 flex flex-wrap gap-4"><a href="#portfolio" class="btn-primary px-8 py-4 rounded-full text-white font-medium inline-flex items-center gap-2"> Lihat Portfolio 
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg></a> <a href="#contact" class="px-8 py-4 rounded-full border-2 border-slate-300 text-slate-700 font-medium hover:border-indigo-500 hover:text-indigo-600 transition-colors"> Hubungi Saya </a>
+        </div><!-- Social Links -->
+        <div class="fade-in stagger-5 flex items-center gap-4 mt-10"><span class="text-sm text-slate-400">Ikuti saya</span>
+         <div class="w-12 h-px bg-slate-300"></div>
+         <div class="flex gap-3"><a href="#" class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:shadow-lg transition-all">
+           <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+           </svg></a> <a href="#" class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:shadow-lg transition-all">
+           <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+           </svg></a> <a href="#" class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:shadow-lg transition-all">
+           <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+           </svg></a>
+         </div>
+        </div>
+       </div><!-- Profile Image -->
+       <div class="order-1 lg:order-2 flex justify-center">
+        <div class="relative">
+         <div class="w-72 h-72 md:w-96 md:h-96 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 p-1">
+          <div class="w-full h-full rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
+           <svg class="w-48 h-48 text-slate-300" fill="currentColor" viewbox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+           </svg>
+          </div>
+         </div><!-- Floating Elements -->
+         <div class="absolute -top-4 -right-4 w-20 h-20 bg-white rounded-2xl shadow-xl flex items-center justify-center animate-bounce" style="animation-duration: 3s;"><span class="text-3xl">💻</span>
+         </div>
+         <div class="absolute -bottom-2 -left-6 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center animate-bounce" style="animation-duration: 2.5s; animation-delay: 0.5s;"><span class="text-2xl">🎨</span>
+         </div>
+         <div class="absolute top-1/2 -right-8 w-14 h-14 bg-white rounded-2xl shadow-xl flex items-center justify-center animate-bounce" style="animation-duration: 2s; animation-delay: 1s;"><span class="text-xl">⚡</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Scroll Indicator -->
+     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-400"><span class="text-xs">Scroll ke bawah</span>
+      <div class="w-6 h-10 rounded-full border-2 border-slate-300 flex justify-center pt-2">
+       <div class="w-1.5 h-3 bg-slate-400 rounded-full animate-bounce"></div>
+      </div>
+     </div>
+    </section><!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+     <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center"><!-- Image Side -->
+       <div class="relative">
         <div class="relative z-10">
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-bg-light mb-6 animate-slide-up" style="animation-delay: 0.1s;">
-                Pesona Abadi Northern Italia
-            </h1>
-            <p class="text-xl sm:text-2xl text-text-light mb-10 max-w-4xl mx-auto animate-slide-up" style="animation-delay: 0.3s;">
-                Temukan keindahan Danau Como, pegunungan Dolomiti, dan budaya kaya Milan dalam sentuhan premium.
-            </p>
-            <button class="btn-primary animate-slide-up" style="animation-delay: 0.5s;" onclick="openVirtualTour()">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.55 4.55a.5.5 0 01-.35.85H5.8a.5.5 0 01-.35-.85L10 10m5 0v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7l5-5z"></path></svg>
-                Virtual Tour 360°
-            </button>
+         <div class="w-full aspect-square max-w-md mx-auto rounded-3xl bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden">
+          <div class="w-full h-full flex items-center justify-center">
+           <svg class="w-48 h-48 text-slate-300" fill="currentColor" viewbox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+           </svg>
+          </div>
+         </div>
+        </div><!-- Decorative Elements -->
+        <div class="absolute -top-6 -left-6 w-24 h-24 bg-indigo-100 rounded-3xl -z-0"></div>
+        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-purple-100 rounded-3xl -z-0"></div><!-- Stats Cards -->
+        <div class="absolute -right-4 top-1/4 bg-white rounded-2xl shadow-xl p-4 z-20">
+         <p class="text-3xl font-bold gradient-text">3+</p>
+         <p class="text-sm text-slate-500">Tahun Pengalaman</p>
         </div>
-    </section>
-
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-
-        <!-- 3.g: Artikel / Blog Wisata (Bagian Sidebar/Konten Samping) -->
-        <div class="lg:flex lg:space-x-12">
-            <div class="lg:w-3/4">
-
-                <!-- 3.a: Deskripsi Destinasi Utama -->
-                <section id="destinasi" class="mb-20 animate-on-scroll">
-                    <h2 class="section-title">Destinasi Unggulan</h2>
-                    <p class="mb-10 max-w-3xl text-lg dark:text-gray-300">Northern Italy adalah perpaduan sempurna antara kemegahan alam dan warisan budaya. Jelajahi ikon-ikon utama kami.</p>
-
-                    <!-- Kartu Destinasi (3.a, 3.n) -->
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div class="bg-bg-light dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <img src="https://placehold.co/600x400/003366/FFFFFF?text=Dolomiti" alt="Dolomiti" class="w-full h-48 object-cover rounded-lg mb-4">
-                            <h3 class="text-xl font-semibold mb-2 text-primary dark:text-accent">Dolomiti</h3>
-                            <p class="text-sm dark:text-gray-400 mb-4">Puncak-puncak batu kapur yang menakjubkan, sempurna untuk hiking dan ski. Keindahan alami yang tak tertandingi.</p>
-                            <a href="#" class="text-accent hover:text-primary dark:hover:text-bg-light transition-colors duration-300 font-medium text-sm inline-flex items-center">
-                                Detail & Tiket
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            </a>
-                            <div class="mt-4 flex space-x-2">
-                                <span class="share-icon">FB</span>
-                                <span class="share-icon">IG</span>
-                            </div>
-                        </div>
-                        <div class="bg-bg-light dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <img src="https://placehold.co/600x400/B8860B/003366?text=Milan" alt="Milan" class="w-full h-48 object-cover rounded-lg mb-4">
-                            <h3 class="text-xl font-semibold mb-2 text-primary dark:text-accent">Milan</h3>
-                            <p class="text-sm dark:text-gray-400 mb-4">Pusat mode dan desain Italia. Jelajahi Duomo yang megah dan galeri seni kelas dunia.</p>
-                            <a href="#" class="text-accent hover:text-primary dark:hover:text-bg-light transition-colors duration-300 font-medium text-sm inline-flex items-center">
-                                Detail & Tiket
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            </a>
-                            <div class="mt-4 flex space-x-2">
-                                <span class="share-icon">FB</span>
-                                <span class="share-icon">IG</span>
-                            </div>
-                        </div>
-                        <div class="bg-bg-light dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <img src="https://placehold.co/600x400/003366/FFFFFF?text=Venice" alt="Venice" class="w-full h-48 object-cover rounded-lg mb-4">
-                            <h3 class="text-xl font-semibold mb-2 text-primary dark:text-accent">Venesia</h3>
-                            <p class="text-sm dark:text-gray-400 mb-4">Kota kanal romantis yang unik. Nikmati gondola dan sejarah yang tak terhitung.</p>
-                            <a href="#" class="text-accent hover:text-primary dark:hover:text-bg-light transition-colors duration-300 font-medium text-sm inline-flex items-center">
-                                Detail & Tiket
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            </a>
-                            <div class="mt-4 flex space-x-2">
-                                <span class="share-icon">FB</span>
-                                <span class="share-icon">IG</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3.j: Filter Destinasi Berdasarkan Kategori -->
-                    <div class="mt-12">
-                        <h4 class="text-lg font-medium mb-3 dark:text-gray-200">Filter Berdasarkan Kategori:</h4>
-                        <div class="flex flex-wrap gap-3">
-                            <button class="filter-btn">Pegunungan</button>
-                            <button class="filter-btn">Kota</button>
-                            <button class="filter-btn">Danau & Air</button>
-                            <button class="filter-btn">Sejarah & Seni</button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 3.b & 3.i: Galeri Foto / Video & Virtual Tour -->
-                <section id="galeri" class="mb-20 animate-on-scroll">
-                    <h2 class="section-title">Galeri Keindahan Northern Italia</h2>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <img src="https://placehold.co/300x300/333333/FFFFFF?text=Foto+1" class="gallery-img" alt="Foto Italia Utara 1">
-                        <img src="https://placehold.co/300x300/B8860B/FFFFFF?text=Foto+2" class="gallery-img" alt="Foto Italia Utara 2">
-                        <img src="https://placehold.co/300x300/003366/FFFFFF?text=Foto+3" class="gallery-img" alt="Foto Italia Utara 3">
-                        <img src="https://placehold.co/300x300/1C1C1C/FFFFFF?text=Foto+4" class="gallery-img" alt="Foto Italia Utara 4">
-                    </div>
-                    <div class="text-center mt-8">
-                        <button class="btn-secondary" onclick="openVirtualTour()">
-                            Tonton Virtual Tour (360°)
-                        </button>
-                    </div>
-                </section>
-
-                <!-- 3.c, 3.d, 3.h: Tiket, Jadwal, Fasilitas & Reservasi -->
-                <section id="reservasi" class="mb-20 bg-primary/5 dark:bg-gray-800 p-8 rounded-xl shadow-lg animate-on-scroll">
-                    <h2 class="section-title text-primary dark:text-accent">Pemesanan & Layanan</h2>
-                    <div class="lg:flex lg:space-x-8">
-                        <!-- Informasi Tiket & Fasilitas (3.c, 3.d) -->
-                        <div class="lg:w-1/2 mb-8 lg:mb-0">
-                            <h3 class="text-2xl font-semibold mb-4 dark:text-gray-100">Jadwal & Fasilitas Kunjungan</h3>
-                            <p class="mb-4">Jam Buka: 09:00 - 18:00 (Setiap Hari)</p>
-                            <ul class="list-disc list-inside space-y-2 dark:text-gray-300">
-                                <li>Tiket Dewasa Mulai dari €25</li>
-                                <li>Gratis Parkir Premium</li>
-                                <li>Akses Wi-Fi Kecepatan Tinggi</li>
-                                <li>Pemandu Wisata Multibahasa</li>
-                                <li>Area Istirahat Eksklusif</li>
-                            </ul>
-                            <!-- 3.l: Cuaca & Kondisi Terkini Widget Placeholder -->
-                            <div class="mt-6 p-4 bg-accent/10 dark:bg-accent/20 rounded-lg text-sm">
-                                <p class="font-medium text-accent">Cuaca Terkini: <span id="current-weather">21°C, Cerah.</span></p>
-                                <p class="text-xs dark:text-gray-400">Kondisi: Normal. Tidak ada penundaan jadwal.</p>
-                            </div>
-                        </div>
-
-                        <!-- Form Pemesanan / Reservasi (3.h) -->
-                        <div class="lg:w-1/2">
-                            <h3 class="text-2xl font-semibold mb-4 dark:text-gray-100">Formulir Reservasi</h3>
-                            <form id="reservation-form" class="space-y-4">
-                                <input type="text" placeholder="Nama Lengkap" required class="form-input">
-                                <input type="email" placeholder="Email Aktif" required class="form-input">
-                                <input type="number" placeholder="Jumlah Pengunjung" required class="form-input">
-                                <input type="date" required class="form-input">
-                                <textarea placeholder="Pesan Khusus (Opsional)" class="form-input h-24"></textarea>
-                                <button type="submit" class="btn-primary w-full">Konfirmasi Reservasi</button>
-                            </form>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 3.e: Event & Kegiatan Lokal -->
-                <section id="events" class="mb-20 animate-on-scroll">
-                    <h2 class="section-title">Event & Kegiatan Lokal</h2>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-xl">
-                            <h3 class="text-xl font-semibold mb-2 dark:text-accent">Festival Anggur Veneto</h3>
-                            <p class="text-sm dark:text-gray-400 mb-2">Tanggal: 15-20 Oktober 2026</p>
-                            <p class="dark:text-gray-300">Nikmati koleksi anggur terbaik dari kawasan Veneto. Acara wajib bagi pecinta kuliner dan wine.</p>
-                        </div>
-                        <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-xl">
-                            <h3 class="text-xl font-semibold mb-2 dark:text-accent">Pameran Desain Milan</h3>
-                            <p class="text-sm dark:text-gray-400 mb-2">Tanggal: 5-10 April 2026</p>
-                            <p class="dark:text-gray-300">Inovasi terbaru dalam mode, arsitektur, dan desain di ibukota mode dunia.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 2.g: Counter / Statistik (Bagian Tengah) -->
-                <section id="stats" class="mb-20 text-center py-16 bg-primary dark:bg-gray-900 rounded-xl animate-on-scroll">
-                    <h2 class="text-3xl font-bold mb-10 text-bg-light">Northern Italy dalam Angka</h2>
-                    <div class="grid grid-cols-3 gap-4 text-bg-light">
-                        <div>
-                            <p class="text-4xl font-extrabold text-accent" id="stat-1">0</p>
-                            <p class="mt-2 text-sm uppercase tracking-wider">Destinasi Populer</p>
-                        </div>
-                        <div>
-                            <p class="text-4xl font-extrabold text-accent" id="stat-2">0</p>
-                            <p class="mt-2 text-sm uppercase tracking-wider">Pengunjung Puas</p>
-                        </div>
-                        <div>
-                            <p class="text-4xl font-extrabold text-accent" id="stat-3">0</p>
-                            <p class="mt-2 text-sm uppercase tracking-wider">Tahun Beroperasi</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 2.h: Map Integration Placeholder -->
-                <section id="map" class="mb-20 animate-on-scroll">
-                    <h2 class="section-title">Lokasi Kami</h2>
-                    <div class="h-96 w-full rounded-xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700">
-                        <!-- Placeholder Iframe untuk Google Maps -->
-                        <iframe src="https://maps.google.com/maps?q=Milan,Italy&z=10&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                    <p class="mt-4 text-sm dark:text-gray-400 text-center">Jelajahi destinasi kami secara visual di peta interaktif.</p>
-                </section>
-
-                <!-- 1.f & 3.q: Contact Form & Form Saran -->
-                <section id="kontak" class="mb-20 animate-on-scroll">
-                    <h2 class="section-title">Hubungi Kami / Beri Penilaian</h2>
-                    <div class="max-w-3xl mx-auto bg-primary/5 dark:bg-gray-800 p-8 rounded-xl shadow-lg">
-                        <form id="contact-form" class="space-y-4">
-                            <p class="text-lg font-medium mb-4">Tim kami siap membantu perjalanan Anda.</p>
-                            <input type="text" placeholder="Nama Anda" required class="form-input">
-                            <input type="email" placeholder="Email Anda" required class="form-input">
-                            <!-- 3.q: Penilaian/Saran -->
-                            <div class="space-y-2">
-                                <label class="block dark:text-gray-300">Beri Penilaian (1-5 Bintang):</label>
-                                <select class="form-input" required>
-                                    <option>5 Bintang (Sangat Puas)</option>
-                                    <option>4 Bintang (Puas)</option>
-                                    <option>3 Bintang (Cukup)</option>
-                                    <option>2 Bintang (Kurang)</option>
-                                    <option>1 Bintang (Buruk)</option>
-                                </select>
-                            </div>
-                            <textarea placeholder="Saran / Pertanyaan Anda" required class="form-input h-32"></textarea>
-                            <button type="submit" class="btn-primary w-full">Kirim Pesan & Penilaian</button>
-                        </form>
-                    </div>
-                </section>
-
-            </div>
-
-            <!-- 1.d: Sidebar (Tampilan Desktop) -->
-            <div class="lg:w-1/4 mt-12 lg:mt-0">
-                <aside class="space-y-10">
-                    <!-- 3.g: Blog/Artikel Wisata Mini -->
-                    <div id="blog" class="p-6 bg-bg-light dark:bg-gray-800 rounded-xl shadow-md border-t-4 border-accent">
-                        <h3 class="text-xl font-semibold mb-4 text-primary dark:text-accent">Artikel Terbaru</h3>
-                        <ul class="space-y-4">
-                            <li><a href="#" class="sidebar-article-link">5 Danau Tersembunyi di Lombardia</a></li>
-                            <li><a href="#" class="sidebar-article-link">Panduan Kuliner Verona</a></li>
-                            <li><a href="#" class="sidebar-article-link">Sejarah Singkat Dolomiti</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- 3.f & 3.k: Ulasan & Testimoni Pengunjung Otomatis (Carousel Simulation) -->
-                    <div class="p-6 bg-primary dark:bg-gray-900 rounded-xl shadow-md">
-                        <h3 class="text-xl font-semibold mb-4 text-bg-light">Testimoni Terbaik</h3>
-                        <div id="testimonial-carousel" class="relative overflow-hidden h-32">
-                            <!-- Testimoni akan dimasukkan oleh JS -->
-                            <p class="text-text-light italic" id="carousel-text">"Pemandangannya sungguh menakjubkan dan layanan yang diberikan sangat profesional."</p>
-                            <p class="text-accent mt-2 text-right font-medium" id="carousel-author">- Budi S. (Indonesia)</p>
-                        </div>
-                    </div>
-
-                    <!-- Tombol Cepat -->
-                    <div class="space-y-3">
-                        <button class="btn-sidebar-quick-link w-full">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l-2 2m-2-2v10a1 1 0 01-1 1h-3"></path></svg>
-                            Cek Jadwal
-                        </button>
-                        <button class="btn-sidebar-quick-link w-full">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Fasilitas
-                        </button>
-                    </div>
-
-                </aside>
-            </div>
+        <div class="absolute -left-4 bottom-1/4 bg-white rounded-2xl shadow-xl p-4 z-20">
+         <p class="text-3xl font-bold gradient-text">20+</p>
+         <p class="text-sm text-slate-500">Proyek Selesai</p>
         </div>
-
-    </main>
-
-    <!-- 1.c: Footer (Bagian Bawah Website) -->
-    <footer class="bg-primary dark:bg-black text-bg-light py-12">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h4 class="text-lg font-semibold mb-4 text-accent">Northern Italia</h4>
-                    <p class="text-sm">Eksplorasi destinasi premium dengan layanan terbaik.</p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Navigasi</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#destinasi" class="footer-link">Destinasi</a></li>
-                        <li><a href="#reservasi" class="footer-link">Pemesanan</a></li>
-                        <li><a href="#kontak" class="footer-link">Kontak</a></li>
-                        <li><a href="#" class="footer-link">Kebijakan Privasi</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Media Sosial</h4>
-                    <div class="flex space-x-3">
-                        <span class="social-icon">F</span>
-                        <span class="social-icon">I</span>
-                        <span class="social-icon">X</span>
-                        <span class="social-icon">Y</span>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Kontak Cepat</h4>
-                    <p class="text-sm">Email: info@northernitalia.com</p>
-                    <p class="text-sm">Telp: +39 012 345 6789</p>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 pt-6 text-center text-sm">
-                &copy; 2024 Northern Italia. All Rights Reserved. Desain oleh Ahli Pemrograman.
-            </div>
+       </div><!-- Text Content -->
+       <div>
+        <p class="text-indigo-600 font-medium mb-4">Tentang Saya</p>
+        <h2 id="about-title" class="section-title font-display text-4xl md:text-5xl font-bold text-slate-900 mb-8">Passionate Developer &amp; Creative Designer</h2>
+        <p id="about-text" class="text-slate-600 leading-relaxed mb-6">Saya adalah mahasiswa D4 Sistem Informatika di Politeknik Negeri Bandung yang memiliki passion besar dalam dunia pengembangan web dan desain UI/UX. Dengan latar belakang pendidikan yang solid dan semangat belajar yang tinggi, saya selalu berusaha menciptakan solusi digital yang tidak hanya fungsional tetapi juga estetis.</p>
+        <p class="text-slate-600 leading-relaxed mb-8">Saya percaya bahwa teknologi harus dapat mempermudah kehidupan manusia, dan desain yang baik adalah kunci untuk mewujudkan hal tersebut. Setiap proyek yang saya kerjakan selalu dipenuhi dengan dedikasi dan perhatian terhadap detail.</p><!-- Info Grid -->
+        <div class="grid grid-cols-2 gap-4 mb-8">
+         <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center">
+           <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+           </svg>
+          </div>
+          <div>
+           <p class="text-sm text-slate-500">Nama</p>
+           <p class="font-medium">Alfarizzi Putra D.</p>
+          </div>
+         </div>
+         <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center">
+           <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+           </svg>
+          </div>
+          <div>
+           <p class="text-sm text-slate-500">Lokasi</p>
+           <p class="font-medium">Subang, Jawa Barat</p>
+          </div>
+         </div>
+         <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center">
+           <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+           </svg>
+          </div>
+          <div>
+           <p class="text-sm text-slate-500">Email</p>
+           <p class="font-medium">alfarizzi@mail.com</p>
+          </div>
+         </div>
+         <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center">
+           <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+           </svg>
+          </div>
+          <div>
+           <p class="text-sm text-slate-500">Status</p>
+           <p class="font-medium">Mahasiswa</p>
+          </div>
+         </div>
+        </div><a href="#contact" class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-medium"> Mari Bekerja Sama 
+         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+         </svg></a>
+       </div>
+      </div>
+     </div>
+    </section><!-- Skills Section -->
+    <section id="skills" class="py-24 bg-slate-50">
+     <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+       <p class="text-indigo-600 font-medium mb-4">Keahlian Saya</p>
+       <h2 class="section-title font-display text-4xl md:text-5xl font-bold text-slate-900 mx-auto">Skills &amp; Expertise</h2>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-12"><!-- Hard Skills -->
+       <div class="bg-white rounded-3xl p-8 shadow-lg">
+        <div class="flex items-center gap-4 mb-8">
+         <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          </svg>
+         </div>
+         <div>
+          <h3 class="font-display text-2xl font-bold text-slate-900">Hard Skills</h3>
+          <p class="text-slate-500">Technical abilities</p>
+         </div>
         </div>
+        <div class="space-y-6">
+         <div>
+          <div class="flex justify-between mb-2"><span class="font-medium text-slate-700">HTML &amp; CSS</span> <span class="text-indigo-600 font-semibold">95%</span>
+          </div>
+          <div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+           <div class="skill-bar h-full rounded-full" style="width: 95%;"></div>
+          </div>
+         </div>
+         <div>
+          <div class="flex justify-between mb-2"><span class="font-medium text-slate-700">JavaScript</span> <span class="text-indigo-600 font-semibold">85%</span>
+          </div>
+          <div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+           <div class="skill-bar h-full rounded-full" style="width: 85%;"></div>
+          </div>
+         </div>
+         <div>
+          <div class="flex justify-between mb-2"><span class="font-medium text-slate-700">React / Vue.js</span> <span class="text-indigo-600 font-semibold">80%</span>
+          </div>
+          <div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+           <div class="skill-bar h-full rounded-full" style="width: 80%;"></div>
+          </div>
+         </div>
+         <div>
+          <div class="flex justify-between mb-2"><span class="font-medium text-slate-700">PHP &amp; Laravel</span> <span class="text-indigo-600 font-semibold">75%</span>
+          </div>
+          <div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+           <div class="skill-bar h-full rounded-full" style="width: 75%;"></div>
+          </div>
+         </div>
+         <div>
+          <div class="flex justify-between mb-2"><span class="font-medium text-slate-700">UI/UX Design</span> <span class="text-indigo-600 font-semibold">88%</span>
+          </div>
+          <div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+           <div class="skill-bar h-full rounded-full" style="width: 88%;"></div>
+          </div>
+         </div>
+         <div>
+          <div class="flex justify-between mb-2"><span class="font-medium text-slate-700">Database (MySQL)</span> <span class="text-indigo-600 font-semibold">78%</span>
+          </div>
+          <div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+           <div class="skill-bar h-full rounded-full" style="width: 78%;"></div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Soft Skills -->
+       <div class="bg-white rounded-3xl p-8 shadow-lg">
+        <div class="flex items-center gap-4 mb-8">
+         <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+         </div>
+         <div>
+          <h3 class="font-display text-2xl font-bold text-slate-900">Soft Skills</h3>
+          <p class="text-slate-500">Personal abilities</p>
+         </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+         <div class="card-hover bg-slate-50 rounded-2xl p-6 text-center">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-indigo-100 flex items-center justify-center"><span class="text-3xl">🗣️</span>
+          </div>
+          <h4 class="font-semibold text-slate-800 mb-2">Komunikasi</h4>
+          <p class="text-sm text-slate-500">Mampu menyampaikan ide dengan jelas</p>
+         </div>
+         <div class="card-hover bg-slate-50 rounded-2xl p-6 text-center">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-purple-100 flex items-center justify-center"><span class="text-3xl">🤝</span>
+          </div>
+          <h4 class="font-semibold text-slate-800 mb-2">Kerja Tim</h4>
+          <p class="text-sm text-slate-500">Kolaborasi efektif dalam tim</p>
+         </div>
+         <div class="card-hover bg-slate-50 rounded-2xl p-6 text-center">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-pink-100 flex items-center justify-center"><span class="text-3xl">💡</span>
+          </div>
+          <h4 class="font-semibold text-slate-800 mb-2">Kreativitas</h4>
+          <p class="text-sm text-slate-500">Solusi inovatif &amp; out of the box</p>
+         </div>
+         <div class="card-hover bg-slate-50 rounded-2xl p-6 text-center">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blue-100 flex items-center justify-center"><span class="text-3xl">🎯</span>
+          </div>
+          <h4 class="font-semibold text-slate-800 mb-2">Problem Solving</h4>
+          <p class="text-sm text-slate-500">Analisis &amp; pemecahan masalah</p>
+         </div>
+         <div class="card-hover bg-slate-50 rounded-2xl p-6 text-center">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-green-100 flex items-center justify-center"><span class="text-3xl">⏰</span>
+          </div>
+          <h4 class="font-semibold text-slate-800 mb-2">Manajemen Waktu</h4>
+          <p class="text-sm text-slate-500">Deadline oriented &amp; terorganisir</p>
+         </div>
+         <div class="card-hover bg-slate-50 rounded-2xl p-6 text-center">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-yellow-100 flex items-center justify-center"><span class="text-3xl">📚</span>
+          </div>
+          <h4 class="font-semibold text-slate-800 mb-2">Fast Learner</h4>
+          <p class="text-sm text-slate-500">Cepat beradaptasi dengan hal baru</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Tools Section -->
+      <div class="mt-16">
+       <h3 class="text-center font-display text-2xl font-bold text-slate-900 mb-8">Tools &amp; Technologies</h3>
+       <div class="flex flex-wrap justify-center gap-4">
+        <div class="bg-white px-6 py-3 rounded-full shadow-md flex items-center gap-2 hover:shadow-lg transition-shadow"><span class="text-xl">⚛️</span> <span class="font-medium text-slate-700">React</span>
+        </div>
+        <div class="bg-white px-6 py-3 rounded-full shadow-md flex items-center gap-2 hover:shadow-lg transition-shadow"><span class="text-xl">💚</span> <span class="font-medium text-slate-700">Vue.js</span>
+        </div>
+        <div class="bg-white px-6 py-3 rounded-full shadow-md flex items-center gap-2 hover:shadow-lg transition-shadow"><span class="text-xl">🎨</span> <span class="font-medium text-slate-700">Figma</span>
+        </div>
+        <div class="bg-white px-6 py-3 rounded-full shadow-md flex items-center gap-2 hover:shadow-lg transition-shadow"><span class="text-xl">🐘</span> <span class="font-medium text-slate-700">PHP</span>
+        </div>
+        <div class="bg-white px-6 py-3 rounded-full shadow-md flex items-center gap-2 hover:shadow-lg transition-shadow"><span class="text-xl">🔥</span> <span class="font-medium text-slate-700">Laravel</span>
+        </div>
+        <div class="bg-white px-6 py-3 rounded-full shadow-md flex items-center gap-2 hover:shadow-lg transition-shadow"><span class="text-xl">🗄️</span> <span class="font-medium text-slate-700">MySQL</span>
+        </div>
+        <div class="bg-white px-6 py-3 rounded-full shadow-md flex items-center gap-2 hover:shadow-lg transition-shadow"><span class="text-xl">🐙</span> <span class="font-medium text-slate-700">Git</span>
+        </div>
+        <div class="bg-white px-6 py-3 rounded-full shadow-md flex items-center gap-2 hover:shadow-lg transition-shadow"><span class="text-xl">🎯</span> <span class="font-medium text-slate-700">Tailwind CSS</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 bg-white">
+     <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+       <p class="text-indigo-600 font-medium mb-4">Portfolio Saya</p>
+       <h2 class="section-title font-display text-4xl md:text-5xl font-bold text-slate-900 mx-auto">Proyek &amp; Karya Terbaik</h2>
+      </div><!-- Filter Buttons -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12"><button class="portfolio-filter active px-6 py-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium transition-all" data-filter="all">Semua</button> <button class="portfolio-filter px-6 py-2 rounded-full bg-slate-100 text-slate-600 font-medium hover:bg-slate-200 transition-all" data-filter="web">Website</button> <button class="portfolio-filter px-6 py-2 rounded-full bg-slate-100 text-slate-600 font-medium hover:bg-slate-200 transition-all" data-filter="app">Aplikasi</button> <button class="portfolio-filter px-6 py-2 rounded-full bg-slate-100 text-slate-600 font-medium hover:bg-slate-200 transition-all" data-filter="design">Design</button>
+      </div><!-- Portfolio Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid"><!-- Project 1 -->
+       <div class="portfolio-item card-hover group" data-category="web">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-500 to-purple-600 aspect-video">
+         <svg class="absolute inset-0 w-full h-full" viewbox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg"><!-- Background --> <rect width="400" height="300" fill="url(#gradientShop)" /> <defs>
+           <lineargradient id="gradientShop" x1="0" y1="0" x2="400" y2="300">
+            <stop offset="0%" stop-color="#667eea" />
+            <stop offset="100%" stop-color="#764ba2" />
+           </lineargradient>
+          </defs> <!-- Store shelves --> <rect x="20" y="40" width="80" height="120" fill="rgba(255,255,255,0.2)" rx="8" /> <rect x="120" y="40" width="80" height="120" fill="rgba(255,255,255,0.25)" rx="8" /> <rect x="220" y="40" width="80" height="120" fill="rgba(255,255,255,0.2)" rx="8" /> <rect x="320" y="40" width="60" height="120" fill="rgba(255,255,255,0.15)" rx="8" /> <!-- Products --> <circle cx="40" cy="70" r="12" fill="#fbbf24" /> <circle cx="70" cy="75" r="14" fill="#60a5fa" /> <circle cx="140" cy="65" r="13" fill="#34d399" /> <circle cx="170" cy="80" r="12" fill="#f87171" /> <circle cx="240" cy="70" r="11" fill="#a78bfa" /> <circle cx="270" cy="75" r="14" fill="#fbbf24" /> <circle cx="330" cy="65" r="12" fill="#60a5fa" /> <!-- Shopping cart --> <g transform="translate(340, 210)">
+           <path d="M 0 0 L 8 0 Q 10 0 10 2 L 8 15 Q 8 17 6 17 L 2 17 Q 0 17 0 15 L 0 2" stroke="white" stroke-width="1.5" fill="none" />
+           <circle cx="3" cy="20" r="1.5" fill="white" />
+           <circle cx="7" cy="20" r="1.5" fill="white" />
+          </g> <!-- Price tags --> <text x="50" y="120" font-size="14" fill="white" font-weight="bold">
+           $49
+          </text> <text x="150" y="120" font-size="14" fill="white" font-weight="bold">
+           $79
+          </text> <text x="250" y="120" font-size="14" fill="white" font-weight="bold">
+           $99
+          </text>
+         </svg>
+         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+          <div><span class="text-indigo-300 text-sm">Website</span>
+           <h4 class="text-white font-display text-xl font-bold">E-Commerce Platform</h4>
+          </div>
+         </div>
+        </div>
+        <div class="p-4">
+         <h4 class="font-display text-xl font-bold text-slate-900 mb-2">E-Commerce Platform</h4>
+         <p class="text-slate-500 text-sm mb-4">Platform jual beli online dengan fitur lengkap termasuk payment gateway dan tracking pesanan.</p>
+         <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-xs rounded-full">React</span> <span class="px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">Node.js</span> <span class="px-3 py-1 bg-pink-100 text-pink-600 text-xs rounded-full">MongoDB</span>
+         </div>
+         <div class="flex gap-3"><a href="#" class="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-700">
+           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+           </svg> Demo </a> <a href="#" class="flex items-center gap-1 text-sm text-slate-600 hover:text-slate-700">
+           <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+           </svg> GitHub </a>
+         </div>
+        </div>
+       </div><!-- Project 2 -->
+       <div class="portfolio-item card-hover group" data-category="app">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-500 to-teal-600 aspect-video">
+         <svg class="absolute inset-0 w-full h-full" viewbox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg"><!-- Background --> <rect width="400" height="300" fill="url(#gradientTask)" /> <defs>
+           <lineargradient id="gradientTask" x1="0" y1="0" x2="400" y2="300">
+            <stop offset="0%" stop-color="#10b981" />
+            <stop offset="100%" stop-color="#14b8a6" />
+           </lineargradient>
+          </defs> <!-- Task cards --> <rect x="20" y="20" width="360" height="50" fill="rgba(255,255,255,0.15)" rx="8" /> <circle cx="40" cy="45" r="8" fill="#34d399" /> <text x="60" y="50" font-size="12" fill="white" font-weight="bold">
+           Complete Project
+          </text> <text x="280" y="50" font-size="10" fill="rgba(255,255,255,0.7)">
+           Today
+          </text> <rect x="20" y="85" width="360" height="50" fill="rgba(255,255,255,0.1)" rx="8" /> <circle cx="40" cy="110" r="8" fill="rgba(255,255,255,0.4)" /> <text x="60" y="115" font-size="12" fill="white" font-weight="bold">
+           Review Code
+          </text> <text x="280" y="115" font-size="10" fill="rgba(255,255,255,0.7)">
+           Tomorrow
+          </text> <rect x="20" y="150" width="360" height="50" fill="rgba(255,255,255,0.1)" rx="8" /> <circle cx="40" cy="175" r="8" fill="rgba(255,255,255,0.4)" /> <text x="60" y="180" font-size="12" fill="white" font-weight="bold">
+           Meeting with Team
+          </text> <text x="280" y="180" font-size="10" fill="rgba(255,255,255,0.7)">
+           Next Week
+          </text> <!-- Add button --> <circle cx="360" cy="260" r="20" fill="rgba(255,255,255,0.3)" /> <text x="352" y="268" font-size="20" fill="white">
+           +
+          </text>
+         </svg>
+         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+          <div><span class="text-green-300 text-sm">Aplikasi</span>
+           <h4 class="text-white font-display text-xl font-bold">Task Management App</h4>
+          </div>
+         </div>
+        </div>
+        <div class="p-4">
+         <h4 class="font-display text-xl font-bold text-slate-900 mb-2">Task Management App</h4>
+         <p class="text-slate-500 text-sm mb-4">Aplikasi manajemen tugas dengan fitur kolaborasi tim, deadline tracker, dan notifikasi real-time.</p>
+         <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-green-100 text-green-600 text-xs rounded-full">Vue.js</span> <span class="px-3 py-1 bg-teal-100 text-teal-600 text-xs rounded-full">Laravel</span> <span class="px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">MySQL</span>
+         </div>
+         <div class="flex gap-3"><a href="#" class="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-700">
+           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+           </svg> Demo </a> <a href="#" class="flex items-center gap-1 text-sm text-slate-600 hover:text-slate-700">
+           <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+           </svg> GitHub </a>
+         </div>
+        </div>
+       </div><!-- Project 3 -->
+       <div class="portfolio-item card-hover group" data-category="design">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-pink-500 to-rose-600 aspect-video">
+         <svg class="absolute inset-0 w-full h-full" viewbox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg"><!-- Background --> <rect width="400" height="300" fill="url(#gradientBrand)" /> <defs>
+           <lineargradient id="gradientBrand" x1="0" y1="0" x2="400" y2="300">
+            <stop offset="0%" stop-color="#ec4899" />
+            <stop offset="100%" stop-color="#be185d" />
+           </lineargradient>
+          </defs> <!-- Logo circle --> <circle cx="100" cy="80" r="45" fill="rgba(255,255,255,0.2)" /> <circle cx="100" cy="80" r="35" fill="rgba(255,255,255,0.15)" /> <text x="85" y="90" font-size="30" fill="white" font-weight="bold">
+           A
+          </text> <!-- Color palette --> <rect x="180" y="40" width="35" height="35" fill="#ec4899" rx="4" /> <rect x="225" y="40" width="35" height="35" fill="#f472b6" rx="4" /> <rect x="270" y="40" width="35" height="35" fill="#fbcfe8" rx="4" /> <rect x="315" y="40" width="35" height="35" fill="#fce7f3" rx="4" /> <!-- Typography samples --> <text x="180" y="110" font-size="16" fill="white" font-weight="bold">
+           HEADLINE
+          </text> <text x="180" y="135" font-size="12" fill="rgba(255,255,255,0.8)">
+           Body text goes here
+          </text> <!-- Design elements --> <path d="M 180 160 Q 200 170 220 160" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" /> <circle cx="250" cy="165" r="8" fill="rgba(255,255,255,0.2)" /> <rect x="270" y="155" width="30" height="20" fill="rgba(255,255,255,0.15)" rx="4" /> <!-- Guidelines grid --> <line x1="180" y1="200" x2="350" y2="200" stroke="rgba(255,255,255,0.1)" stroke-width="1" /> <line x1="180" y1="220" x2="350" y2="220" stroke="rgba(255,255,255,0.1)" stroke-width="1" /> <line x1="180" y1="240" x2="350" y2="240" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+         </svg>
+         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+          <div><span class="text-pink-300 text-sm">Design</span>
+           <h4 class="text-white font-display text-xl font-bold">Brand Identity Design</h4>
+          </div>
+         </div>
+        </div>
+        <div class="p-4">
+         <h4 class="font-display text-xl font-bold text-slate-900 mb-2">Brand Identity Design</h4>
+         <p class="text-slate-500 text-sm mb-4">Desain identitas brand lengkap termasuk logo, color palette, typography, dan brand guidelines.</p>
+         <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pink-100 text-pink-600 text-xs rounded-full">Figma</span> <span class="px-3 py-1 bg-rose-100 text-rose-600 text-xs rounded-full">Illustrator</span> <span class="px-3 py-1 bg-orange-100 text-orange-600 text-xs rounded-full">Photoshop</span>
+         </div>
+         <div class="flex gap-3"><a href="#" class="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-700">
+           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+           </svg> Lihat Detail </a>
+         </div>
+        </div>
+       </div><!-- Project 4 -->
+       <div class="portfolio-item card-hover group" data-category="web">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500 to-cyan-600 aspect-video">
+         <svg class="absolute inset-0 w-full h-full" viewbox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg"><!-- Background --> <rect width="400" height="300" fill="url(#gradientAnalytics)" /> <defs>
+           <lineargradient id="gradientAnalytics" x1="0" y1="0" x2="400" y2="300">
+            <stop offset="0%" stop-color="#3b82f6" />
+            <stop offset="100%" stop-color="#06b6d4" />
+           </lineargradient>
+          </defs> <!-- Bar chart --> <rect x="30" y="180" width="25" height="90" fill="rgba(255,255,255,0.3)" rx="4" /> <rect x="65" y="140" width="25" height="130" fill="rgba(255,255,255,0.4)" rx="4" /> <rect x="100" y="100" width="25" height="170" fill="rgba(255,255,255,0.5)" rx="4" /> <rect x="135" y="120" width="25" height="150" fill="rgba(255,255,255,0.4)" rx="4" /> <rect x="170" y="80" width="25" height="190" fill="rgba(255,255,255,0.5)" rx="4" /> <!-- Line chart --> <polyline points="220,180 240,140 260,160 280,100 300,130 320,80 340,110 360,60" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none" /> <circle cx="220" cy="180" r="3" fill="rgba(255,255,255,0.8)" /> <circle cx="240" cy="140" r="3" fill="rgba(255,255,255,0.8)" /> <circle cx="260" cy="160" r="3" fill="rgba(255,255,255,0.8)" /> <circle cx="280" cy="100" r="3" fill="rgba(255,255,255,0.8)" /> <!-- Stat boxes --> <rect x="30" y="20" width="80" height="35" fill="rgba(255,255,255,0.15)" rx="4" /> <text x="40" y="35" font-size="10" fill="rgba(255,255,255,0.7)">
+           Revenue
+          </text> <text x="40" y="50" font-size="12" fill="white" font-weight="bold">
+           $24.5K
+          </text> <rect x="125" y="20" width="80" height="35" fill="rgba(255,255,255,0.1)" rx="4" /> <text x="135" y="35" font-size="10" fill="rgba(255,255,255,0.7)">
+           Users
+          </text> <text x="135" y="50" font-size="12" fill="white" font-weight="bold">
+           1,234
+          </text> <rect x="220" y="20" width="80" height="35" fill="rgba(255,255,255,0.15)" rx="4" /> <text x="230" y="35" font-size="10" fill="rgba(255,255,255,0.7)">
+           Growth
+          </text> <text x="230" y="50" font-size="12" fill="white" font-weight="bold">
+           +12.5%
+          </text>
+         </svg>
+         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+          <div><span class="text-blue-300 text-sm">Website</span>
+           <h4 class="text-white font-display text-xl font-bold">Dashboard Analytics</h4>
+          </div>
+         </div>
+        </div>
+        <div class="p-4">
+         <h4 class="font-display text-xl font-bold text-slate-900 mb-2">Dashboard Analytics</h4>
+         <p class="text-slate-500 text-sm mb-4">Dashboard interaktif untuk visualisasi data dengan grafik real-time dan laporan komprehensif.</p>
+         <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">React</span> <span class="px-3 py-1 bg-cyan-100 text-cyan-600 text-xs rounded-full">Chart.js</span> <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-xs rounded-full">Tailwind</span>
+         </div>
+         <div class="flex gap-3"><a href="#" class="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-700">
+           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+           </svg> Demo </a> <a href="#" class="flex items-center gap-1 text-sm text-slate-600 hover:text-slate-700">
+           <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+           </svg> GitHub </a>
+         </div>
+        </div>
+       </div><!-- Project 5 -->
+       <div class="portfolio-item card-hover group" data-category="app">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500 to-amber-600 aspect-video">
+         <svg class="absolute inset-0 w-full h-full" viewbox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg"><!-- Background --> <rect width="400" height="300" fill="url(#gradientFood)" /> <defs>
+           <lineargradient id="gradientFood" x1="0" y1="0" x2="400" y2="300">
+            <stop offset="0%" stop-color="#f97316" />
+            <stop offset="100%" stop-color="#b45309" />
+           </lineargradient>
+          </defs> <!-- Restaurant card --> <rect x="25" y="30" width="350" height="120" fill="rgba(255,255,255,0.15)" rx="12" /> <rect x="35" y="40" width="80" height="100" fill="rgba(255,255,255,0.2)" rx="8" /> <!-- Food image placeholder --> <circle cx="75" cy="90" r="25" fill="rgba(255,255,255,0.25)" /> <!-- Restaurant info --> <text x="130" y="65" font-size="13" fill="white" font-weight="bold">
+           Pizza Supreme
+          </text> <text x="130" y="80" font-size="10" fill="rgba(255,255,255,0.8)">
+           ⭐ 4.8 • 20-30 min
+          </text> <text x="130" y="95" font-size="10" fill="rgba(255,255,255,0.7)">
+           Italian • Fast Food
+          </text> <text x="330" y="75" font-size="11" fill="white" font-weight="bold">
+           $15.99
+          </text> <!-- Order button --> <rect x="310" y="100" width="50" height="30" fill="rgba(255,255,255,0.3)" rx="6" /> <text x="320" y="122" font-size="11" fill="white" font-weight="bold">
+           Order
+          </text> <!-- Delivery tracking --> <circle cx="50" cy="200" r="18" fill="rgba(255,255,255,0.2)" /> <text x="43" y="210" font-size="14" fill="white">
+           🛵
+          </text> <line x1="68" y1="200" x2="180" y2="200" stroke="rgba(255,255,255,0.3)" stroke-width="2" /> <circle cx="200" cy="200" r="18" fill="rgba(255,255,255,0.2)" /> <text x="193" y="210" font-size="14" fill="white">
+           📍
+          </text> <text x="40" y="230" font-size="10" fill="rgba(255,255,255,0.8)">
+           Picking up
+          </text> <text x="170" y="230" font-size="10" fill="rgba(255,255,255,0.8)">
+           Arriving in 18 min
+          </text> <!-- Map indicator --> <circle cx="280" cy="200" r="35" fill="rgba(255,255,255,0.1)" /> <path d="M 280 165 L 290 200 L 270 200 Z" fill="rgba(255,255,255,0.3)" />
+         </svg>
+         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+          <div><span class="text-orange-300 text-sm">Aplikasi</span>
+           <h4 class="text-white font-display text-xl font-bold">Food Delivery App</h4>
+          </div>
+         </div>
+        </div>
+        <div class="p-4">
+         <h4 class="font-display text-xl font-bold text-slate-900 mb-2">Food Delivery App</h4>
+         <p class="text-slate-500 text-sm mb-4">Aplikasi pesan antar makanan dengan fitur tracking, review, dan integrasi pembayaran digital.</p>
+         <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-orange-100 text-orange-600 text-xs rounded-full">React Native</span> <span class="px-3 py-1 bg-amber-100 text-amber-600 text-xs rounded-full">Firebase</span> <span class="px-3 py-1 bg-yellow-100 text-yellow-600 text-xs rounded-full">Maps API</span>
+         </div>
+         <div class="flex gap-3"><a href="#" class="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-700">
+           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+           </svg> Demo </a> <a href="#" class="flex items-center gap-1 text-sm text-slate-600 hover:text-slate-700">
+           <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+           </svg> GitHub </a>
+         </div>
+        </div>
+       </div><!-- Project 6 -->
+       <div class="portfolio-item card-hover group" data-category="design">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-violet-500 to-purple-600 aspect-video">
+         <svg class="absolute inset-0 w-full h-full" viewbox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg"><!-- Background --> <rect width="400" height="300" fill="url(#gradientUI)" /> <defs>
+           <lineargradient id="gradientUI" x1="0" y1="0" x2="400" y2="300">
+            <stop offset="0%" stop-color="#8b5cf6" />
+            <stop offset="100%" stop-color="#9333ea" />
+           </lineargradient>
+          </defs> <!-- Buttons --> <rect x="30" y="40" width="100" height="35" fill="rgba(255,255,255,0.25)" rx="8" /> <text x="50" y="65" font-size="12" fill="white" font-weight="bold">
+           Primary
+          </text> <rect x="145" y="40" width="100" height="35" fill="rgba(255,255,255,0.1)" rx="8" /> <text x="160" y="65" font-size="12" fill="white" font-weight="bold">
+           Secondary
+          </text> <rect x="260" y="40" width="100" height="35" fill="rgba(255,255,255,0.1)" rx="8" stroke="rgba(255,255,255,0.3)" stroke-width="1" /> <text x="275" y="65" font-size="12" fill="white" font-weight="bold">
+           Outline
+          </text> <!-- Input field --> <rect x="30" y="95" width="330" height="35" fill="rgba(255,255,255,0.08)" rx="8" stroke="rgba(255,255,255,0.2)" stroke-width="1" /> <text x="40" y="120" font-size="11" fill="rgba(255,255,255,0.5)">
+           Search component...
+          </text> <!-- Cards/Badges --> <rect x="30" y="155" width="50" height="25" fill="rgba(255,255,255,0.15)" rx="12" /> <text x="38" y="172" font-size="9" fill="white" font-weight="bold">
+           Badge
+          </text> <rect x="95" y="155" width="50" height="25" fill="rgba(255,255,255,0.2)" rx="12" /> <text x="100" y="172" font-size="9" fill="white" font-weight="bold">
+           Active
+          </text> <rect x="160" y="155" width="50" height="25" fill="rgba(255,255,255,0.1)" rx="12" /> <text x="165" y="172" font-size="9" fill="white" font-weight="bold">
+           Disabled
+          </text> <!-- Icons grid --> <circle cx="280" cy="168" r="12" fill="rgba(255,255,255,0.15)" /> <text x="275" y="173" font-size="12" fill="white">
+           ✓
+          </text> <circle cx="320" cy="168" r="12" fill="rgba(255,255,255,0.15)" /> <text x="313" y="173" font-size="12" fill="white">
+           ✕
+          </text> <circle cx="360" cy="168" r="12" fill="rgba(255,255,255,0.15)" /> <text x="353" y="173" font-size="12" fill="white">
+           +
+          </text> <!-- Typography samples --> <text x="30" y="235" font-size="14" fill="white" font-weight="bold">
+           Heading
+          </text> <text x="30" y="255" font-size="11" fill="rgba(255,255,255,0.8)">
+           Body Text goes here
+          </text> <text x="30" y="275" font-size="9" fill="rgba(255,255,255,0.6)">
+           Caption/Helper Text
+          </text>
+         </svg>
+         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+          <div><span class="text-violet-300 text-sm">Design</span>
+           <h4 class="text-white font-display text-xl font-bold">UI Kit Components</h4>
+          </div>
+         </div>
+        </div>
+        <div class="p-4">
+         <h4 class="font-display text-xl font-bold text-slate-900 mb-2">UI Kit Components</h4>
+         <p class="text-slate-500 text-sm mb-4">Library komponen UI reusable dengan berbagai variasi untuk mempercepat proses desain.</p>
+         <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-violet-100 text-violet-600 text-xs rounded-full">Figma</span> <span class="px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">Design System</span>
+         </div>
+         <div class="flex gap-3"><a href="#" class="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-700">
+           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+           </svg> Lihat Detail </a>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Education Section -->
+    <section id="education" class="py-24 bg-slate-50">
+     <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+       <p class="text-indigo-600 font-medium mb-4">Riwayat Pendidikan</p>
+       <h2 class="section-title font-display text-4xl md:text-5xl font-bold text-slate-900 mx-auto">Education Journey</h2>
+      </div>
+      <div class="max-w-3xl mx-auto">
+       <div class="space-y-8"><!-- Education 1 -->
+        <div class="timeline-item pb-8">
+         <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+          <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+           <div><span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full mb-2">2023 - Sekarang</span>
+            <h4 class="font-display text-xl font-bold text-slate-900">Politeknik Negeri Bandung</h4>
+            <p class="text-indigo-600 font-medium">D4 Sistem Informatika</p>
+           </div>
+           <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center flex-shrink-0"><span class="text-2xl">🎓</span>
+           </div>
+          </div>
+          <p class="text-slate-500">Mendalami ilmu sistem informatika dengan fokus pada pengembangan software, database management, dan teknologi web modern.</p>
+         </div>
+        </div><!-- Education 2 -->
+        <div class="timeline-item pb-8">
+         <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+          <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+           <div><span class="inline-block px-3 py-1 bg-purple-100 text-purple-600 text-sm rounded-full mb-2">2020 - 2023</span>
+            <h4 class="font-display text-xl font-bold text-slate-900">SMAN 1 Subang</h4>
+            <p class="text-purple-600 font-medium">Jurusan IPA</p>
+           </div>
+           <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center flex-shrink-0"><span class="text-2xl">📚</span>
+           </div>
+          </div>
+          <p class="text-slate-500">Menyelesaikan pendidikan menengah atas dengan fokus pada bidang sains dan matematika, serta aktif dalam kegiatan ekstrakurikuler.</p>
+         </div>
+        </div><!-- Education 3 -->
+        <div class="timeline-item pb-8">
+         <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+          <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+           <div><span class="inline-block px-3 py-1 bg-pink-100 text-pink-600 text-sm rounded-full mb-2">2017 - 2020</span>
+            <h4 class="font-display text-xl font-bold text-slate-900">SMP IT Alamy</h4>
+            <p class="text-pink-600 font-medium">Sekolah Menengah Pertama</p>
+           </div>
+           <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center flex-shrink-0"><span class="text-2xl">📖</span>
+           </div>
+          </div>
+          <p class="text-slate-500">Membangun fondasi pendidikan dengan nilai-nilai islami dan akademik yang seimbang di lingkungan sekolah islam terpadu.</p>
+         </div>
+        </div><!-- Education 4 -->
+        <div class="timeline-item">
+         <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+          <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+           <div><span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 text-sm rounded-full mb-2">2011 - 2017</span>
+            <h4 class="font-display text-xl font-bold text-slate-900">SDN Langensari Subang</h4>
+            <p class="text-blue-600 font-medium">Sekolah Dasar</p>
+           </div>
+           <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center flex-shrink-0"><span class="text-2xl">✏️</span>
+           </div>
+          </div>
+          <p class="text-slate-500">Memulai perjalanan pendidikan formal dengan semangat belajar tinggi dan pengembangan karakter sejak dini.</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Contact Section -->
+    <section id="contact" class="py-24 bg-white">
+     <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16"><!-- Contact Info -->
+       <div>
+        <p class="text-indigo-600 font-medium mb-4">Hubungi Saya</p>
+        <h2 class="section-title font-display text-4xl md:text-5xl font-bold text-slate-900 mb-8">Mari Berkolaborasi!</h2>
+        <p class="text-slate-600 leading-relaxed mb-10">Saya selalu terbuka untuk diskusi tentang proyek baru, ide kreatif, atau kesempatan untuk menjadi bagian dari visi Anda. Jangan ragu untuk menghubungi saya!</p>
+        <div class="space-y-6">
+         <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+           <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+           </svg>
+          </div>
+          <div>
+           <p class="text-sm text-slate-500">Email</p><a href="mailto:alfarizzi@gmail.com" class="font-medium text-slate-800 hover:text-indigo-600">alfarizzi@gmail.com</a>
+          </div>
+         </div>
+         <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center flex-shrink-0">
+           <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+           </svg>
+          </div>
+          <div>
+           <p class="text-sm text-slate-500">WhatsApp</p><a href="#" class="font-medium text-slate-800 hover:text-indigo-600">+62 812 3456 7890</a>
+          </div>
+         </div>
+         <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center flex-shrink-0">
+           <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+           </svg>
+          </div>
+          <div>
+           <p class="text-sm text-slate-500">Instagram</p><a href="#" class="font-medium text-slate-800 hover:text-indigo-600">@al.jyggalag</a>
+          </div>
+         </div>
+         <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center flex-shrink-0">
+           <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+           </svg>
+          </div>
+          <div>
+           <p class="text-sm text-slate-500">LinkedIn</p><a href="#" class="font-medium text-slate-800 hover:text-indigo-600">Alfarizzi Putra Diansyah</a>
+          </div>
+         </div>
+        </div>
+       </div><!-- Contact Form -->
+       <div>
+        <form id="contact-form" class="bg-slate-50 rounded-3xl p-8">
+         <h3 class="font-display text-2xl font-bold text-slate-900 mb-6">Kirim Pesan</h3>
+         <div class="space-y-5">
+          <div><label for="name" class="block text-sm font-medium text-slate-700 mb-2">Nama Lengkap</label> <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all" placeholder="Masukkan nama Anda">
+          </div>
+          <div><label for="email" class="block text-sm font-medium text-slate-700 mb-2">Email</label> <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all" placeholder="Masukkan email Anda">
+          </div>
+          <div><label for="subject" class="block text-sm font-medium text-slate-700 mb-2">Subjek</label> <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all" placeholder="Subjek pesan">
+          </div>
+          <div><label for="message" class="block text-sm font-medium text-slate-700 mb-2">Pesan</label> <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all resize-none" placeholder="Tulis pesan Anda..."></textarea>
+          </div><button type="submit" class="btn-primary w-full py-4 rounded-xl text-white font-medium flex items-center justify-center gap-2"> <span>Kirim Pesan</span>
+           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+           </svg></button>
+         </div>
+         <div id="form-message" class="hidden mt-4 p-4 rounded-xl text-center"></div>
+        </form>
+       </div>
+      </div>
+     </div>
+    </section><!-- Footer -->
+    <footer class="bg-slate-900 text-white py-16">
+     <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-10 mb-12"><!-- Brand -->
+       <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+         <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-display font-bold text-xl">
+          A
+         </div>
+         <div><span class="font-display font-semibold text-xl">Alfarizzi</span>
+          <p class="text-sm text-slate-400">Web Developer</p>
+         </div>
+        </div>
+        <p id="footer-text" class="text-slate-400 leading-relaxed max-w-md">Menciptakan pengalaman digital yang indah dan fungsional. Selalu siap untuk tantangan baru dan kolaborasi yang menarik.</p>
+       </div><!-- Quick Links -->
+       <div>
+        <h4 class="font-display font-semibold text-lg mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+         <li><a href="#home" class="text-slate-400 hover:text-white transition-colors">Beranda</a></li>
+         <li><a href="#about" class="text-slate-400 hover:text-white transition-colors">Tentang</a></li>
+         <li><a href="#skills" class="text-slate-400 hover:text-white transition-colors">Keahlian</a></li>
+         <li><a href="#portfolio" class="text-slate-400 hover:text-white transition-colors">Portfolio</a></li>
+         <li><a href="#education" class="text-slate-400 hover:text-white transition-colors">Pendidikan</a></li>
+        </ul>
+       </div><!-- Social -->
+       <div>
+        <h4 class="font-display font-semibold text-lg mb-4">Connect</h4>
+        <div class="flex gap-3"><a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-indigo-600 hover:text-white transition-all">
+          <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+          </svg></a> <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-indigo-600 hover:text-white transition-all">
+          <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+           <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+          </svg></a> <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-indigo-600 hover:text-white transition-all">
+          <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+           <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg></a>
+        </div>
+       </div>
+      </div>
+      <div class="border-t border-slate-800 pt-8">
+       <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-slate-400 text-sm">© 2025 Alfarizzi Putra Diansyah. All rights reserved.</p>
+        <p class="text-slate-400 text-sm">Made with ❤️ in Subang, Indonesia</p>
+       </div>
+      </div>
+     </div>
     </footer>
+   </div>
+   <script>
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const closeMenuBtn = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-    <!-- 2.c & 3.o: Chatbot / Live Chat Floating Button -->
-    <button id="chat-toggle" class="fixed bottom-6 right-6 p-4 rounded-full bg-accent text-bg-light shadow-xl hover:bg-yellow-700 transition duration-300 z-50">
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-    </button>
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('active');
+      });
+    }
 
-    <!-- Chatbot Modal -->
-    <div id="chat-modal" class="fixed bottom-20 right-6 w-80 h-96 bg-bg-light dark:bg-gray-800 rounded-xl shadow-2xl z-50 hidden flex-col overflow-hidden">
-        <div class="bg-primary text-bg-light p-4 flex justify-between items-center rounded-t-xl">
-            <h5 class="font-semibold">Panduan Wisata AI</h5>
-            <button id="close-chat" class="text-bg-light hover:text-accent">&times;</button>
-        </div>
-        <div id="chat-body" class="flex-grow p-4 overflow-y-auto space-y-3">
-            <div class="chat-message bot">Halo! Saya GuideAI. Ada yang bisa saya bantu tentang Northern Italy?</div>
-        </div>
-        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex">
-            <input type="text" id="chat-input" placeholder="Tanyakan sesuatu..." class="flex-grow py-2 px-3 border border-gray-300 dark:border-gray-700 rounded-l-lg text-sm dark:bg-bg-dark focus:outline-none">
-            <button id="chat-send" class="bg-accent text-bg-light p-2 rounded-r-lg hover:bg-yellow-700 transition duration-300">Kirim</button>
-        </div>
-    </div>
+    if (closeMenuBtn && mobileMenu) {
+      closeMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+    }
 
+    // Close mobile menu when clicking links
+    const mobileLinks = mobileMenu?.querySelectorAll('a');
+    mobileLinks?.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+    });
+    const defaultConfig = {
+      site_name: 'Alfarizzi',
+      tagline: 'Web Developer',
+      hero_title: 'Alfarizzi Putra Diansyah',
+      hero_role: 'Web Developer & UI/UX Designer',
+      hero_description: 'Mahasiswa D4 Sistem Informatika Politeknik Negeri Bandung yang passionate dalam menciptakan pengalaman digital yang indah dan fungsional.',
+      about_title: 'Passionate Developer & Creative Designer',
+      about_text: 'Saya adalah mahasiswa D4 Sistem Informatika di Politeknik Negeri Bandung yang memiliki passion besar dalam dunia pengembangan web dan desain UI/UX.',
+      footer_text: 'Menciptakan pengalaman digital yang indah dan fungsional. Selalu siap untuk tantangan baru dan kolaborasi yang menarik.',
+      background_color: '#f8fafc',
+      surface_color: '#ffffff',
+      text_color: '#1e293b',
+      primary_color: '#667eea',
+      secondary_color: '#764ba2'
+    };
 
-    <!-- JavaScript untuk Fungsionalitas Modern -->
-    <script>
-        // Variabel global untuk status bahasa
-        let currentLang = 'ID';
+    let config = { ...defaultConfig };
 
-        // --- 2.a: Dark / Light Mode Toggle Logic ---
-        const toggleDarkMode = () => {
-            const body = document.body;
-            const isDark = body.classList.toggle('dark');
-            body.classList.toggle('light', !isDark);
-            
-            // Simpan preferensi pengguna di localStorage
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            
-            // Update ikon
-            document.getElementById('sun-icon').classList.toggle('hidden', isDark);
-            document.getElementById('moon-icon').classList.toggle('hidden', !isDark);
-        };
-
-        // Muat preferensi saat startup
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-                document.body.classList.add('dark');
-                document.body.classList.remove('light');
-                document.getElementById('sun-icon').classList.remove('hidden');
-                document.getElementById('moon-icon').classList.add('hidden');
-            } else {
-                document.body.classList.add('light');
-                document.body.classList.remove('dark');
-                document.getElementById('sun-icon').classList.add('hidden');
-                document.getElementById('moon-icon').classList.remove('hidden');
+    // Initialize Element SDK
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (newConfig) => {
+          config = { ...defaultConfig, ...newConfig };
+          updateUI();
+        },
+        mapToCapabilities: (cfg) => ({
+          recolorables: [
+            {
+              get: () => cfg.background_color || defaultConfig.background_color,
+              set: (value) => {
+                cfg.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => cfg.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                cfg.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (value) => {
+                cfg.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => cfg.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                cfg.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => cfg.secondary_color || defaultConfig.secondary_color,
+              set: (value) => {
+                cfg.secondary_color = value;
+                window.elementSdk.setConfig({ secondary_color: value });
+              }
             }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ['site_name', cfg.site_name || defaultConfig.site_name],
+          ['tagline', cfg.tagline || defaultConfig.tagline],
+          ['hero_title', cfg.hero_title || defaultConfig.hero_title],
+          ['hero_role', cfg.hero_role || defaultConfig.hero_role],
+          ['hero_description', cfg.hero_description || defaultConfig.hero_description],
+          ['about_title', cfg.about_title || defaultConfig.about_title],
+          ['about_text', cfg.about_text || defaultConfig.about_text],
+          ['footer_text', cfg.footer_text || defaultConfig.footer_text]
+        ])
+      });
+    }
 
-            document.getElementById('dark-mode-toggle').addEventListener('click', toggleDarkMode);
-            initializeInteractions();
-            animateCounters();
-            setupScrollAnimation();
-            startTestimonialCarousel();
+    function updateUI() {
+      // Update text content
+      const navName = document.getElementById('nav-name');
+      if (navName) navName.textContent = config.site_name || defaultConfig.site_name;
+
+      const navTagline = document.getElementById('nav-tagline');
+      if (navTagline) navTagline.textContent = config.tagline || defaultConfig.tagline;
+
+      const heroTitle = document.getElementById('hero-title');
+      if (heroTitle) {
+        const title = config.hero_title || defaultConfig.hero_title;
+        const parts = title.split(' ');
+        if (parts.length >= 2) {
+          heroTitle.innerHTML = `${parts.slice(0, -1).join(' ')}<br><span class="gradient-text">${parts[parts.length - 1]}</span>`;
+        } else {
+          heroTitle.textContent = title;
+        }
+      }
+
+      const heroRole = document.getElementById('hero-role');
+      if (heroRole) heroRole.textContent = config.hero_role || defaultConfig.hero_role;
+
+      const heroDescription = document.getElementById('hero-description');
+      if (heroDescription) heroDescription.textContent = config.hero_description || defaultConfig.hero_description;
+
+      const aboutTitle = document.getElementById('about-title');
+      if (aboutTitle) aboutTitle.textContent = config.about_title || defaultConfig.about_title;
+
+      const aboutText = document.getElementById('about-text');
+      if (aboutText) aboutText.textContent = config.about_text || defaultConfig.about_text;
+
+      const footerText = document.getElementById('footer-text');
+      if (footerText) footerText.textContent = config.footer_text || defaultConfig.footer_text;
+
+      // Update colors
+      const bgColor = config.background_color || defaultConfig.background_color;
+      const surfaceColor = config.surface_color || defaultConfig.surface_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const primaryColor = config.primary_color || defaultConfig.primary_color;
+      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+
+      // Apply background color to sections
+      const sectionsBg = document.querySelectorAll('#skills, #education');
+      sectionsBg.forEach(section => {
+        section.style.backgroundColor = bgColor;
+      });
+
+      // Apply surface color
+      const surfaces = document.querySelectorAll('#about, #portfolio, #contact, .bg-white');
+      surfaces.forEach(surface => {
+        if (!surface.classList.contains('shadow-md') && !surface.classList.contains('shadow-lg') && !surface.classList.contains('shadow-xl')) {
+          surface.style.backgroundColor = surfaceColor;
+        }
+      });
+
+      // Apply primary color to gradient elements
+      document.documentElement.style.setProperty('--primary-color', primaryColor);
+      document.documentElement.style.setProperty('--secondary-color', secondaryColor);
+    }
+
+    // Portfolio Filter
+    const filterButtons = document.querySelectorAll('.portfolio-filter');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+
+        // Update active button
+        filterButtons.forEach(btn => {
+          btn.classList.remove('bg-gradient-to-r', 'from-indigo-500', 'to-purple-600', 'text-white');
+          btn.classList.add('bg-slate-100', 'text-slate-600');
         });
+        button.classList.remove('bg-slate-100', 'text-slate-600');
+        button.classList.add('bg-gradient-to-r', 'from-indigo-500', 'to-purple-600', 'text-white');
 
-        // --- 1.d: Sidebar / Menu Mobile Logic ---
-        const initializeInteractions = () => {
-            const menuToggle = document.getElementById('menu-toggle');
-            const closeMenu = document.getElementById('close-menu');
-            const sidebar = document.getElementById('sidebar-menu');
-
-            menuToggle.addEventListener('click', () => sidebar.classList.add('active'));
-            closeMenu.addEventListener('click', () => sidebar.classList.remove('active'));
-
-            // Tutup sidebar saat link diklik (untuk navigasi)
-            document.querySelectorAll('.sidebar-link').forEach(link => {
-                link.addEventListener('click', () => sidebar.classList.remove('active'));
-            });
-        };
-        
-        // --- 2.d: Language Switcher Logic (Simulasi) ---
-        document.getElementById('lang-switcher').addEventListener('click', () => {
-            currentLang = currentLang === 'ID' ? 'EN' : 'ID';
-            document.getElementById('lang-switcher').textContent = currentLang === 'ID' ? 'ID/EN' : 'EN/ID';
-            const message = currentLang === 'ID' 
-                ? 'Bahasa diubah ke Indonesia. (Konten simulasi)' 
-                : 'Language switched to English. (Simulated content)';
-            showMessageBox(message);
+        // Filter items
+        portfolioItems.forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.style.display = 'block';
+            item.style.animation = 'fadeIn 0.5s ease forwards';
+          } else {
+            item.style.display = 'none';
+          }
         });
+      });
+    });
+
+    // Contact Form
+    const contactForm = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
         
-        // --- Custom Modal/Message Box (Pengganti alert()) ---
-        const showMessageBox = (message) => {
-            console.log("Pesan Sistem: " + message);
-            // Dalam implementasi nyata, ini akan menampilkan modal/toast di UI.
-            // Untuk prototipe ini, kita gunakan console log dan placeholder.
-            alert(message); // Menggunakan alert sementara untuk demonstrasi fitur
-        };
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const subject = document.getElementById('subject').value.trim();
+        const message = document.getElementById('message').value.trim();
 
-        // --- 2.g: Counter / Statistik Animation ---
-        const animateCounter = (elementId, target) => {
-            const element = document.getElementById(elementId);
-            let count = 0;
-            const duration = 1500; // 1.5 detik
-            const step = target / (duration / 10); // Hitung langkah per 10ms
+        if (!name || !email || !message) {
+          formMessage.textContent = 'Mohon lengkapi semua field yang diperlukan.';
+          formMessage.className = 'mt-4 p-4 rounded-xl text-center bg-red-100 text-red-600';
+          formMessage.classList.remove('hidden');
+          return;
+        }
 
-            const timer = setInterval(() => {
-                count += step;
-                if (count >= target) {
-                    clearInterval(timer);
-                    count = target;
-                }
-                element.textContent = Math.floor(count).toLocaleString('id-ID');
-            }, 10);
-        };
-
-        const animateCounters = () => {
-            animateCounter('stat-1', 45); // Destinasi Populer
-            animateCounter('stat-2', 12500); // Pengunjung Puas
-            animateCounter('stat-3', 15); // Tahun Beroperasi
-        };
-
-        // --- 3.k: Testimonial Carousel Simulation ---
-        const testimonials = [
-            { text: "Pemandangannya sungguh menakjubkan dan layanan yang diberikan sangat profesional.", author: "- Budi S. (Indonesia)" },
-            { text: "A truly unforgettable experience. The Dolomites were breathtaking.", author: "- Jane D. (USA)" },
-            { text: "Il Duomo di Milano è magnifico! Torneremo presto.", author: "- Giovanni R. (Italia)" }
-        ];
-
-        let currentTestimonial = 0;
-        const startTestimonialCarousel = () => {
-            const textElement = document.getElementById('carousel-text');
-            const authorElement = document.getElementById('carousel-author');
-
-            setInterval(() => {
-                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-                const t = testimonials[currentTestimonial];
-
-                // Animasi fade out
-                textElement.style.opacity = '0';
-                authorElement.style.opacity = '0';
-
-                setTimeout(() => {
-                    textElement.textContent = t.text;
-                    authorElement.textContent = t.author;
-                    // Animasi fade in
-                    textElement.style.opacity = '1';
-                    authorElement.style.opacity = '1';
-                }, 500); // Tunggu setengah detik untuk fade out
-            }, 5000); // Ganti setiap 5 detik
-        };
-
-        // --- 2.b: Scroll Animation / Parallax Simulation (Intersection Observer) ---
-        const setupScrollAnimation = () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-slide-up');
-                        entry.target.style.opacity = '1';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                rootMargin: '0px',
-                threshold: 0.1
-            });
-
-            document.querySelectorAll('.animate-on-scroll').forEach(element => {
-                element.style.opacity = '0'; // Sembunyikan secara default
-                observer.observe(element);
-            });
-        };
-
-        // --- 2.c & 3.o: Chatbot / Live Chat Logic ---
-        const chatToggle = document.getElementById('chat-toggle');
-        const chatModal = document.getElementById('chat-modal');
-        const closeChat = document.getElementById('close-chat');
-        const chatBody = document.getElementById('chat-body');
-        const chatInput = document.getElementById('chat-input');
-        const chatSend = document.getElementById('chat-send');
-
-        chatToggle.addEventListener('click', () => chatModal.classList.toggle('hidden'));
-        closeChat.addEventListener('click', () => chatModal.classList.add('hidden'));
-        chatSend.addEventListener('click', () => handleChat());
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleChat();
-        });
-
-        const handleChat = () => {
-            const message = chatInput.value.trim();
-            if (message === '') return;
-
-            // Tampilkan pesan pengguna
-            appendMessage(message, 'user');
-            chatInput.value = '';
-
-            // Simulasi balasan Chatbot
-            setTimeout(() => {
-                let botResponse = 'Saya belum mengerti pertanyaan Anda. Coba tanyakan tentang "tiket" atau "destinasi".';
-                const lowerMsg = message.toLowerCase();
-
-                if (lowerMsg.includes('tiket') || lowerMsg.includes('harga')) {
-                    botResponse = 'Informasi tiket dapat Anda temukan di bagian Reservasi. Tiket dewasa mulai dari €25.';
-                } else if (lowerMsg.includes('destinasi') || lowerMsg.includes('tempat')) {
-                    botResponse = 'Kami merekomendasikan Dolomiti, Milan, dan Venesia. Ingin detail salah satunya?';
-                } else if (lowerMsg.includes('cuaca')) {
-                    botResponse = document.getElementById('current-weather').textContent;
-                } else if (lowerMsg.includes('terima kasih')) {
-                    botResponse = 'Sama-sama! Senang melayani Anda.';
-                }
-                
-                appendMessage(botResponse, 'bot');
-            }, 1000);
-        };
-
-        const appendMessage = (text, sender) => {
-            const msgDiv = document.createElement('div');
-            msgDiv.classList.add('chat-message', sender, 'p-3', 'rounded-lg', 'max-w-[80%]', 'shadow-sm');
-            msgDiv.textContent = text;
-
-            if (sender === 'user') {
-                msgDiv.classList.add('bg-accent/80', 'text-bg-light', 'ml-auto');
-            } else {
-                msgDiv.classList.add('bg-gray-200', 'dark:bg-gray-700', 'text-text-dark', 'dark:text-text-light', 'mr-auto');
-            }
-            chatBody.appendChild(msgDiv);
-            chatBody.scrollTop = chatBody.scrollHeight; // Auto-scroll
-        };
+        // Simulate form submission
+        formMessage.textContent = 'Terima kasih! Pesan Anda telah terkirim. Saya akan segera menghubungi Anda.';
+        formMessage.className = 'mt-4 p-4 rounded-xl text-center bg-green-100 text-green-600';
+        formMessage.classList.remove('hidden');
         
-        // --- 3.i: Virtual Tour Placeholder Function ---
-        const openVirtualTour = () => {
-            showMessageBox("Memuat Virtual Tour 360°... (Ini adalah simulasi, akan diarahkan ke halaman virtual tour di implementasi penuh.)");
-        };
+        contactForm.reset();
+        
+        setTimeout(() => {
+          formMessage.classList.add('hidden');
+        }, 5000);
+      });
+    }
 
-        // --- Gaya untuk elemen-elemen berulang (didefinisikan dalam JS untuk kebersihan) ---
-        // Catatan: Dalam produksi, ini lebih baik diintegrasikan ke dalam konfigurasi tailwind.config
+    // Header scroll effect
+    const header = document.getElementById('header');
+    const appWrapper = document.getElementById('app-wrapper');
 
-        const styleSheet = document.createElement("style");
-        styleSheet.textContent = `
-            .nav-link {
-                @apply hover:text-accent dark:hover:text-accent font-medium transition duration-300 p-2 rounded-lg;
-            }
-            .btn-primary {
-                @apply bg-accent text-bg-light font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-700 transition duration-300 flex items-center justify-center mx-auto lg:mx-0;
-            }
-            .btn-secondary {
-                @apply border border-accent text-accent font-bold py-3 px-8 rounded-full shadow-md hover:bg-accent hover:text-bg-light transition duration-300;
-            }
-            .btn-sidebar-quick-link {
-                @apply bg-primary/10 dark:bg-gray-700 text-primary dark:text-gray-300 font-medium py-3 px-4 rounded-xl hover:bg-accent/20 dark:hover:bg-accent/40 transition duration-300 flex items-center justify-center text-sm;
-            }
-            .section-title {
-                @apply text-3xl sm:text-4xl font-extrabold mb-4 border-b-2 border-accent inline-block pb-1 text-primary dark:text-bg-light;
-            }
-            .form-input {
-                @apply w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent dark:bg-gray-700 dark:text-text-light transition duration-300;
-            }
-            .gallery-img {
-                @apply object-cover rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-500 cursor-pointer;
-            }
-            .share-icon {
-                @apply w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-sm font-bold text-primary dark:text-accent hover:bg-accent hover:text-bg-light cursor-pointer transition;
-            }
-            .footer-link {
-                @apply hover:text-accent transition duration-300;
-            }
-            .social-icon {
-                @apply w-8 h-8 flex items-center justify-center rounded-full bg-accent text-primary dark:text-bg-light hover:scale-110 transition duration-300 font-bold;
-            }
-            .sidebar-article-link {
-                @apply text-sm text-primary dark:text-gray-300 hover:text-accent transition duration-300 block font-medium;
-            }
-            
-        `;
-        document.head.appendChild(styleSheet);
-    </script>
-</body>
+    if (appWrapper && header) {
+      appWrapper.addEventListener('scroll', () => {
+        if (appWrapper.scrollTop > 50) {
+          header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+        } else {
+          header.style.boxShadow = 'none';
+        }
+      });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target && appWrapper) {
+          const offsetTop = target.offsetTop - 80;
+          appWrapper.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Initialize UI
+    updateUI();
+  </script>
+  </div>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9cbefbbbe291283c',t:'MTc3MDc2MTkxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
